@@ -1,12 +1,16 @@
 /* 
  * File:   hearts.h
  * Author: Stephanie Peacock
- * Created on June 4, 2023, 4:45 PM
+ * Created on October 24, 2023, 6:45 PM
  */
 
 #ifndef HEARTS_H
 #define HEARTS_H
 
+//Constants
+const int DECK = 52;    //constant number of cards
+
+//structures
 struct Cards {
     int cards[13];      //Card values to determine trick winner            
 };
@@ -23,20 +27,24 @@ struct Player {
     int score;          //Game score
 };
 
-
+struct Show {
+    string pshow[13];   //to correspond with the player structure    
+    string show[DECK];  //face values for the entire deck
+};
 
 // Input function prototypes
-int  shuffle(fstream &);        //Shuffle entire deck then return the array
-void deal(int *, Player *);     //Deal to each player - deck array & all players
-int  linSrch(int *);            //Find 2 of clubs  (nested inside deal) - deck array
-void mSort(Player *);           //Sort each player's hand (nested inside deal)
-void print(Player &,string*);   //Print out face values of player's hand
-void playCard(Player *);        //Determine which card to play
-void played(Player &,string*);  //Print out the cards played (nested inside playCard)
-void set(Player &);             //Set the player's choice to card value (nested inside playCard)
-void trick( Player *);          //Score the trick
-void unset(Player &);           //Set choice back & remove played card from hand (nested inside trick)
-void count();                   //Counts how many tricks have been played
+//Deal to each player - deck array & all players
+void deal(fstream &, int *, Player *, const int, Show *);  
+void shuffle(int *, const int, Show *); //Shuffle the deck array (nested inside deal)
+int  linSrch(int *, const int);         //Find 2 of clubs  (nested inside deal) - deck array
+void mSort(Player *, Show *);           //Sort each player's hand (nested inside deal)
+void print(Player &, Show &);           //Print out face values of player's hand
+void playCard(Player *, Show*);         //Determine which card to play
+void played(Player &,Show*);            //Print out the cards played (nested inside playCard)
+void set(Player &);                     //Set the player's choice to card value (nested inside playCard)
+void trick( Player *);                  //Score the trick
+void unset(Player &);                   //Set choice back & remove played card from hand (nested inside trick)
+void count();                           //Counts how many tricks have been played
 
 #endif /* HEARTS_H */
 
