@@ -45,13 +45,12 @@ int main(int argc, char** argv) {
     strcpy(p[1].name,"Larry"); strcpy(p[2].name,"Curly"); strcpy(p[3].name,"Moe"); 
     //GET THE FACE VALUES OF THE DECK
     fv.open("cards.dat", ios::in);
-    
     //For Testing
-    cout << "Show values: ";
+ //   cout << "Show values: ";
     //just the player 1 values will be used
     for(int i = 0; i < DECK; i++){
        getline(fv,pfv[0].show[i]);
-       cout << pfv[0].show[i] << " ";
+    //   cout << pfv[0].show[i] << " ";
     }
     cout << endl;
 
@@ -59,6 +58,7 @@ int main(int argc, char** argv) {
     
     //close the file
     fv.close();
+    
     //INTRO
     cout << "Hey buddy, we need a fourth player!" << endl
          << "Let's play some Hearts!" << endl
@@ -82,17 +82,13 @@ int main(int argc, char** argv) {
     
     //Deal the cards
     deal(cards,deck,p,DECK,pfv);
-    
-    for(int n = 0; n < 4; n++){
-        cout << "Player" << n << " info: " << p[0].name;
-        for(int j = 0; j < 13; j++){
-            cout << p[n].hand.cards[j] << " ";
-        }
-        cout << endl << "Order: " << p[n].order << " Match: " << p[n].match << endl;
+ 
+    //Hand loop
+    for(int i = 0; i < 13; i++){
+        //Play 13 tricks
+        play(p,pfv);    
     }
     
-    cout << endl;
-    print(p[0],pfv[0]);
     
     //save.open("saved.bin", ios::out | ios::in | ios::binary);   //read in saved file
     //make sure we start at the beginning
@@ -117,7 +113,10 @@ void deal(fstream &cards, int *deck, Player *p, const int DECK, Show *pfv){
     cards.open("cards.bin", ios::in | ios::binary);
     deck = new int[DECK];
     cards.read(reinterpret_cast<char*>(deck), DECK * sizeof(int));
-    
+    //close the file
+    cards.close();
+
+/*for testing
     cout << endl << "Deck Array: ";
     for(int i = 0; i < DECK; i++){
         cout << deck[i] << " ";
@@ -128,11 +127,10 @@ void deal(fstream &cards, int *deck, Player *p, const int DECK, Show *pfv){
         cout << pfv[0].show[i] << " ";
     }
     cout << endl;
+*/    
     
-    
-    //shuffle the cards
-    shuffle(deck,DECK,pfv);
-    
+    shuffle(deck,DECK,pfv); //shuffle the cards
+/* For Testing   
     cout << endl << "Shuffled Deck Array: ";
     for(int i = 0; i < DECK; i++){
         cout << deck[i] << " ";
@@ -143,15 +141,14 @@ void deal(fstream &cards, int *deck, Player *p, const int DECK, Show *pfv){
         cout << pfv[0].show[i] << " ";
     }
     cout << endl;
+*/    
     
-    //deal out the cards & face values
-    for(int i = 0; i < 13; i++) {
+    for(int i = 0; i < 13; i++) {   //deal out the cards & face values
         p[0].hand.cards[i] =  deck[i];      pfv[0].pshow[i] = pfv[0].show[i] + "\t";
         p[1].hand.cards[i] =  deck[(i+13)]; pfv[1].pshow[i] = pfv[0].show[i+13] + "\t";  
         p[2].hand.cards[i] =  deck[(i+26)]; pfv[2].pshow[i] = pfv[0].show[i+26] + "\t";  
         p[3].hand.cards[i] =  deck[(i+39)]; pfv[3].pshow[i] = pfv[0].show[i+39] + "\t";
     }
-    
     //sort all the hands
     mSort(p,pfv);
     //find the player order
@@ -239,28 +236,162 @@ void print(Player &p, Show &pfv){
     }    
 }      
 
-//Determine which card to play
-void playCard(Player *, string*){
-    
+//Play the trick
+void play(Player *p, Show *pfv){
+    for(int trick = 0; trick < 4; trick++){
+        //Player's Turn    
+        if (p[0].order == trick) {         
+            // Print player's cards
+            print(p[0], pfv[0]); 
+            do {
+                cout << "Choose a card in your hand you wish to play: ";
+                cin >> p[0].choice;
+                // Add 2clubs validation                                   
+                while (p[0].order == FIRST && p[0].hand.cards[0] == 1 && p[0].choice != 1) {
+                        cout << "Please play 2\u2663: ";
+                        cin >> p[0].choice; 
+                }
+                if(p[0].order == FIRST){
+                    p[0].match = true;
+                }
+                // Add suit validation
+                // Check for Clubs
+                    if((p[1].order == FIRST && p[1].choice < 14) ||
+                       (p[2].order == FIRST && p[2].choice < 14) ||
+                       (p[3].order == FIRST && p[3].choice < 14)) {
+                       for(int i = 0; i < 12; i++) {
+                           int vc = i+1;
+
+                            while(p[0].choice == vc && p[0].hand.cards[i] != 0 && (p[0].hand.cards[i] >13 && p[0].hand.cards[i+1] < 13 )) {
+
+                                        cout << "Please play \u2663: ";
+                                        cin >> p[0].choice;     
+                            }
+                            p[0].match = true;
+                        }
+                    }
+                // Check for Diamonds
+                    if((p[1].order == FIRST && p[1].choice > 13 && p[1].choice < 27) ||
+                       (p[2].order == FIRST && p[2].choice > 13 && p[2].choice < 27) ||
+                       (p[3].order == FIRST && p[3].choice > 13 && p[3].choice < 27)) { 
+                        for(int i = 0; i < 12; i++) {
+                           int vc = i+1;
+
+                            while(p[0].choice == vc && p[0].hand.cards[i] !=0 && (p[0].hand.cards[i] <14 && p[0].hand.cards[i] >26 && p[0].hand.cards[i+1] >13 && p[0].hand.cards[i+1] <27)) {
+                                        cout << "Please play \u2662: ";
+                                        cin >> p[0].choice;
+                            }
+                            p[0].match = true;
+                        }
+                    }
+                // Check for Spades
+                    if((p[1].order == FIRST && p[1].choice > 26 && p[1].choice < 40) ||
+                       (p[2].order == FIRST && p[2].choice > 26 && p[2].choice < 40) ||
+                       (p[3].order == FIRST && p[3].choice > 26 && p[3].choice < 40)) { 
+                        for(int i = 0; i < 12; i++) {
+                           int vc = i+1;
+
+                            while(p[0].choice == vc && p[0].hand.cards[i] !=0 && (p[0].hand.cards[i] <27 && p[0].hand.cards[i] >39 && p[0].hand.cards[i+1] >26 && p[0].hand.cards[i+1] <40)) {
+
+                                    cout << "Please play \u2660: ";
+                                    cin >> p[0].choice;
+                            }
+                        p[0].match = true;
+                        }
+                    }
+                // Check for hearts
+                    if((p[1].order == FIRST && p[1].choice > 39) ||
+                       (p[2].order == FIRST && p[2].choice > 39) ||
+                       (p[3].order == FIRST && p[3].choice > 39)) { 
+
+                        for(int i = 0; i < 12; i++) {
+                           int vc = i+1;
+
+                            while(p[0].choice == vc && p[0].hand.cards[i] !=0 && (p[0].hand.cards[i] <40 && p[0].hand.cards[i+1] >39)) {
+
+                                    cout << "Please play \u2661: ";
+                                    cin >> p[0].choice; 
+                            }
+                        p[0].match = true;
+                        }
+                    }
+            } while ((p[0].choice < 1 || p[0].choice > 13)    ||
+                    (p[0].choice == 1  && p[0].hand.cards[0]  == 0) ||
+                    (p[0].choice == 2  && p[0].hand.cards[1]  == 0) ||
+                    (p[0].choice == 3  && p[0].hand.cards[2]  == 0) ||
+                    (p[0].choice == 4  && p[0].hand.cards[3]  == 0) ||
+                    (p[0].choice == 5  && p[0].hand.cards[4]  == 0) ||
+                    (p[0].choice == 6  && p[0].hand.cards[5]  == 0) ||
+                    (p[0].choice == 7  && p[0].hand.cards[6]  == 0) ||
+                    (p[0].choice == 8  && p[0].hand.cards[7]  == 0) ||
+                    (p[0].choice == 9  && p[0].hand.cards[8]  == 0) ||
+                    (p[0].choice == 10 && p[0].hand.cards[9]  == 0) ||
+                    (p[0].choice == 11 && p[0].hand.cards[10] == 0) ||
+                    (p[0].choice == 12 && p[0].hand.cards[11] == 0) ||
+                    (p[0].choice == 13 && p[0].hand.cards[12] == 0));               
+            // Valid card chosen, set match to true
+            p[0].match = true;
+            // Player played
+
+            //Player set
+
+                
+        } 
+        // Larry's Turn
+        else if (p[1].order == trick) {
+        //    cout << "Larry's cards";
+        //    print(p[1],pfv[1]);
+    //        playCard(p,pfv,1);
+            // Output the card played
+    //        played(p[1], pfv[1]);
+            // Set the played card for scoring
+    //        set(p[1],pfv[1]);    
+        } 
+        // Curly's Turn
+        else if (p[2].order == trick) {
+        //    cout << "Curly's cards";
+        //    print(p[2],pfv[2]);
+    //        playCard(p,pfv,2);
+            // Output the card played
+    //        played(p[2], pfv[2]);
+            // Set the played card for scoring
+    //        set(p[2],pfv[2]);    
+        }
+        // Moe's Turn
+        else if (p[3].order == trick) {
+        //    cout << "Curly's cards";
+        //    print(p[3],pfv[3]);
+    //        playCard(p,pfv,3);
+            // Output the card played
+    //        played(p[3], pfv[3]);
+            // Set the played card for scoring
+    //        set(p[3],pfv[3]);    
+        } 
+    }     
 }      
 
+//Stooge picks a card
+void playCard(Player &p, Show &pfv, int n){
+    
+}
+
 //Print out the cards played (nested inside playCard)
-void played(Player &,string*){
+void played(Player &p, Show &pfv){
     
 }    
 
 //Set the player's choice to card value (nested inside playCard)
-void set(Player &){
+void set(Player &p, Show *pfv){
     
 }       
 
 //Score the trick
-void trick( Player *){
+void trick( Player *p){
     
 }          
 
 //Set choice back & remove played card from hand (nested inside trick)
-void unset(Player &){
+void unset(Player &p, Show *pfv){
     
 }       
 
