@@ -431,37 +431,37 @@ void play(Player *p, Show *pfv){
         // Player played
         played(p[0],pfv[0]);
         //Player set
-        set(p[0],pfv[0]);       
+        set(p[0]);       
         } 
         // Larry's Turn
         else if (p[1].order == trick) {
         //    cout << "Larry's cards";
-        //    print(p[1],pfv[1]);
+            print(p[1],pfv[1]);
             playCard(p,pfv,1);
             // Output the card played
             played(p[1], pfv[1]);
             // Set the played card for scoring
-            set(p[1],pfv[1]);    
+            set(p[1]);    
         } 
         // Curly's Turn
         else if (p[2].order == trick) {
         //    cout << "Curly's cards";
-        //    print(p[2],pfv[2]);
+            print(p[2],pfv[2]);
             playCard(p,pfv,2);
             // Output the card played
             played(p[2], pfv[2]);
             // Set the played card for scoring
-            set(p[2],pfv[2]);    
+            set(p[2]);    
         }
         // Moe's Turn
         else if (p[3].order == trick) {
         //    cout << "Curly's cards";
-        //    print(p[3],pfv[3]);
+            print(p[3],pfv[3]);
             playCard(p,pfv,3);
             // Output the card played
             played(p[3], pfv[3]);
             // Set the played card for scoring
-            set(p[3],pfv[3]);    
+            set(p[3]);    
         } 
     }     
 }      
@@ -531,7 +531,7 @@ void played(Player &p, Show &pfv){
 }    
 
 //Set the player's choice to card value (nested inside playCard)
-void set(Player &p, Show &pfv){
+void set(Player &p){
 // Set p.choice to card value for scoring
     p.choice == 1  ? p.choice = p.hand.cards[0] : p.choice == 2  ? p.choice = p.hand.cards[1] :
     p.choice == 3  ? p.choice = p.hand.cards[2] : p.choice == 4  ? p.choice = p.hand.cards[3] : 
@@ -571,50 +571,42 @@ void trick( Player *p){
     cout << endl << "Trick is worth " << score << " points. ";
     //output the winner
     cout << p[winner].name << " takes the trick." << endl << endl;
+    //set the new order - player was winner?
+    winner == 0 ? p[0].order = FIRST,p[1].order = SECOND,p[2].order = THIRD,p[3].order = FOURTH :
+    //larry was winner?
+    winner == 1 ? p[1].order = FIRST,p[2].order = SECOND,p[3].order = THIRD,p[0].order = FOURTH :
+    //curly was winner?
+    winner == 2 ? p[2].order = FIRST,p[3].order = SECOND,p[0].order = THIRD,p[1].order = FOURTH :
+    //else moe was the winner
+                  p[3].order = FIRST,p[0].order = SECOND,p[1].order = THIRD,p[2].order = FOURTH;
+    //assign the points to the winner
+    p[winner].tScore += score;
     //check all 4 players
     for(int i = 0; i < 4; i++){
-        //assign the points to the winner
-        p[winner].tScore += score;
-        //set the new order - player was winner?
-        winner == 0 ? p[0].order = FIRST,p[1].order = SECOND,p[2].order = THIRD,p[3].order = FOURTH :
-        //larry was winner?
-        winner == 1 ? p[1].order = FIRST,p[2].order = SECOND,p[3].order = THIRD,p[0].order = FOURTH :
-        //curly was winner?
-        winner == 2 ? p[2].order = FIRST,p[3].order = SECOND,p[0].order = THIRD,p[1].order = FOURTH :
-        //else moe was the winner
-                      p[3].order = FIRST,p[0].order = SECOND,p[1].order = THIRD,p[2].order = FOURTH;
         //reset match for all
         p[i].match = false;
         //for testing - output all hand values
-        cout << "\t" << p[i].name <<"'s hand is " << p[i].tScore; 
+        cout << p[i].name <<"'s hand is " << p[i].tScore << "\t"; 
     }
     cout << endl; 
 }          
 
 //Set choice back & remove played card from hand (nested inside trick)
 void unset(Player &p, Show &pfv){
-    // Set p.choice back to the card number instead of card value & set used card to 0
-    p.choice == p.hand.cards[0]  ? p.choice = 1  : p.choice == p.hand.cards[1]  ? p.choice = 2  : 
-    p.choice == p.hand.cards[2]  ? p.choice = 3  : p.choice == p.hand.cards[3]  ? p.choice = 4  : 
-    p.choice == p.hand.cards[4]  ? p.choice = 5  : p.choice == p.hand.cards[5]  ? p.choice = 6  :     
-    p.choice == p.hand.cards[6]  ? p.choice = 7  : p.choice == p.hand.cards[7]  ? p.choice = 8  : 
-    p.choice == p.hand.cards[8]  ? p.choice = 9  : p.choice == p.hand.cards[9]  ? p.choice = 10 : 
-    p.choice == p.hand.cards[10] ? p.choice = 11 : p.choice == p.hand.cards[11] ? p.choice = 12 :     
-    p.choice = 13;     
     // set chosen card to 0 & empty face values so they dont show
-    if (p.choice == 1) { p.hand.cards[0]  = 0; pfv.pshow[0]  = "";}
-    if (p.choice == 2) { p.hand.cards[1]  = 0; pfv.pshow[1]  = "";}
-    if (p.choice == 3) { p.hand.cards[2]  = 0; pfv.pshow[2]  = "";}
-    if (p.choice == 4) { p.hand.cards[3]  = 0; pfv.pshow[3]  = "";}
-    if (p.choice == 5) { p.hand.cards[4]  = 0; pfv.pshow[4]  = "";}
-    if (p.choice == 6) { p.hand.cards[5]  = 0; pfv.pshow[5]  = "";}
-    if (p.choice == 7) { p.hand.cards[6]  = 0; pfv.pshow[6]  = "";}
-    if (p.choice == 8) { p.hand.cards[7]  = 0; pfv.pshow[7]  = "";}
-    if (p.choice == 9) { p.hand.cards[8]  = 0; pfv.pshow[8]  = "";}
-    if (p.choice == 10){ p.hand.cards[9]  = 0; pfv.pshow[9]  = "";}
-    if (p.choice == 11){ p.hand.cards[10] = 0; pfv.pshow[10] = "";}
-    if (p.choice == 12){ p.hand.cards[11] = 0; pfv.pshow[11] = "";}
-    if (p.choice == 13){ p.hand.cards[12] = 0; pfv.pshow[12] = "";}    
+    if (p.choice == p.hand.cards[0]) { p.hand.cards[0]  = 0; pfv.pshow[0]  = "";}
+    if (p.choice == p.hand.cards[1]) { p.hand.cards[1]  = 0; pfv.pshow[1]  = "";}
+    if (p.choice == p.hand.cards[2]) { p.hand.cards[2]  = 0; pfv.pshow[2]  = "";}
+    if (p.choice == p.hand.cards[3]) { p.hand.cards[3]  = 0; pfv.pshow[3]  = "";}
+    if (p.choice == p.hand.cards[4]) { p.hand.cards[4]  = 0; pfv.pshow[4]  = "";}
+    if (p.choice == p.hand.cards[5]) { p.hand.cards[5]  = 0; pfv.pshow[5]  = "";}
+    if (p.choice == p.hand.cards[6]) { p.hand.cards[6]  = 0; pfv.pshow[6]  = "";}
+    if (p.choice == p.hand.cards[7]) { p.hand.cards[7]  = 0; pfv.pshow[7]  = "";}
+    if (p.choice == p.hand.cards[8]) { p.hand.cards[8]  = 0; pfv.pshow[8]  = "";}
+    if (p.choice == p.hand.cards[9]) { p.hand.cards[9]  = 0; pfv.pshow[9]  = "";}
+    if (p.choice == p.hand.cards[10]){ p.hand.cards[10] = 0; pfv.pshow[10] = "";}
+    if (p.choice == p.hand.cards[11]){ p.hand.cards[11] = 0; pfv.pshow[11] = "";}
+    if (p.choice == p.hand.cards[12]){ p.hand.cards[12] = 0; pfv.pshow[12] = "";}    
 }       
 
 //Counts how many tricks have been played
