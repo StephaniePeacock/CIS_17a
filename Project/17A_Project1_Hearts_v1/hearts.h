@@ -45,7 +45,7 @@ void playCard(Player *, Show *, int);   //Determine which card to play (Stooge)
 void played(Player &,Show &);           //Print out the cards played (nested inside playCard)
 void set(Player &, Show &);             //Set the player's choice to card value (nested inside playCard)
 void trick(Player *);                   //Score the trick
-void unset(Player &, Show *);           //Set choice back & remove played card from hand (nested inside trick)
+void unset(Player &, Show &);           //Set choice back & remove played card from hand (nested inside trick)
 void count();                           //Counts how many tricks have been played
 
 #endif /* HEARTS_H */
