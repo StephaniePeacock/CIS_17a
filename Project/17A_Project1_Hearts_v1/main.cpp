@@ -45,17 +45,11 @@ int main(int argc, char** argv) {
     strcpy(p[1].name,"Larry"); strcpy(p[2].name,"Curly"); strcpy(p[3].name,"Moe"); 
     //GET THE FACE VALUES OF THE DECK
     fv.open("cards.dat", ios::in);
-    //For Testing
- //   cout << "Show values: ";
     //just the player 1 values will be used
     for(int i = 0; i < DECK; i++){
        getline(fv,pfv[0].show[i]);
-    //   cout << pfv[0].show[i] << " ";
     }
-    cout << endl;
-
- //   cin.ignore();
-    
+    cout << endl;  
     //close the file
     fv.close();
     
@@ -122,34 +116,9 @@ void deal(fstream &cards, int *deck, Player *p, const int DECK, Show *pfv){
     cards.read(reinterpret_cast<char*>(deck), DECK * sizeof(int));
     //close the file
     cards.close();
-
-/*for testing
-    cout << endl << "Deck Array: ";
-    for(int i = 0; i < DECK; i++){
-        cout << deck[i] << " ";
-    }
-    cout << endl;
-    cout << endl << "Show Array: ";
-    for(int i = 0; i < DECK; i++){
-        cout << pfv[0].show[i] << " ";
-    }
-    cout << endl;
-*/    
-    
+    //shuffle the deck
     shuffle(deck,DECK,pfv); //shuffle the cards
-/* For Testing   
-    cout << endl << "Shuffled Deck Array: ";
-    for(int i = 0; i < DECK; i++){
-        cout << deck[i] << " ";
-    }
-    cout << endl;
-    cout << endl << "Shuffled Show Array: ";
-    for(int i = 0; i < DECK; i++){
-        cout << pfv[0].show[i] << " ";
-    }
-    cout << endl;
-*/    
-    
+    //pass out the cards
     for(int i = 0; i < 13; i++) {   //deal out the cards & face values
         p[0].hand.cards[i] =  deck[i];      pfv[0].pshow[i] = pfv[0].show[i] + "\t";
         p[1].hand.cards[i] =  deck[(i+13)]; pfv[1].pshow[i] = pfv[0].show[i+13] + "\t";  
@@ -245,6 +214,9 @@ void print(Player &p, Show &pfv){
 
 //Play the trick
 void play(Player *p, Show *pfv){
+    //set min higher than possible - used to find valid range
+    int min = 53;
+    //loop 4 times so each player goes
     for(int trick = 0; trick < 4; trick++){
         //Player's Turn    
         if (p[0].order == trick) {         
@@ -279,13 +251,11 @@ void play(Player *p, Show *pfv){
                 
                 // Add suit validation if not first player
                 // Check for Clubs
-                if((p[1].order == FIRST && p[1].choice < 14) ||
-                   (p[2].order == FIRST && p[2].choice < 14) ||
-                   (p[3].order == FIRST && p[3].choice < 14)) {                       
-                    //counter bigger than the cards to check if there's a valid card
-                    int min = 53;
+                if((p[1].order == FIRST && p[1].choice <= 13) ||
+                   (p[2].order == FIRST && p[2].choice <= 13) ||
+                   (p[3].order == FIRST && p[3].choice <= 13)) {                       
                     //choice is valid match
-                    if (p[0].hand.cards[p[0].choice-1] < 14){
+                    if (p[0].hand.cards[p[0].choice-1] <= 13){
                         valid = true;
                         p[0].match = true;
                     }
@@ -296,19 +266,19 @@ void play(Player *p, Show *pfv){
                         }
                     }
                     // else if there is a valid match that wasn't played
-                    if(min < 14){
+                    if(min <= 13 && min != 0){
                         while(p[0].hand.cards[p[0].choice-1] > 13){
                             //prompt for new choice
                             cout << "Please play \u2663: ";
                                     cin >> p[0].choice; 
                             //recheck if choice is valid match
-                            if (p[0].hand.cards[p[0].choice-1] < 14){
+                            if (p[0].hand.cards[p[0].choice-1] <= 13){
                                 valid = true;
                                 p[0].match = true;    
                             }
                         }
                     }
-                    else if (min > 14){
+                    else if (min > 13){
                         //no matching cards, so any card will do
                         valid = true;
                         //but we didn't match
@@ -316,36 +286,36 @@ void play(Player *p, Show *pfv){
                     }
                 }
                 //now check for Diamonds
-                else if((p[1].order == FIRST && (p[1].choice > 13 && p[1].choice < 27)) ||
-                        (p[2].order == FIRST && (p[2].choice > 13 && p[2].choice < 27)) ||
-                        (p[3].order == FIRST && (p[3].choice > 13 && p[3].choice < 27))) {                       
-                    //bool to check if there's a usable card
-                    bool repick = false;
+                else if((p[1].order == FIRST && (p[1].choice >= 14 && p[1].choice <= 26)) ||
+                        (p[2].order == FIRST && (p[2].choice >= 14 && p[2].choice <= 26)) ||
+                        (p[3].order == FIRST && (p[3].choice >= 14 && p[3].choice <= 26))) {                       
+                    //reset min to original value
+                    min = 53;
                     //choice is valid match
-                    if (p[0].hand.cards[p[0].choice-1] > 13 && p[0].hand.cards[p[0].choice-1] < 27){
+                    if (p[0].hand.cards[p[0].choice-1] >= 14 && p[0].hand.cards[p[0].choice-1] <= 26){
                         valid = true;
                         p[0].match = true;
                     }
                     //loop through all the cards to get the min & max
                     for (int n = 0; n < 13; n++){
-                        if(p[0].hand.cards[n] > 13 && p[0].hand.cards[n] < 27){
-                            repick = true;
+                        if(p[0].hand.cards[n] >= 14 && p[0].hand.cards[n] <= 26){
+                            min = p[0].hand.cards[n];
                         }
                     }
                     // else if there is a valid match that wasn't played
-                    if(repick){
-                        while(p[0].hand.cards[p[0].choice-1] < 14 && p[0].hand.cards[p[0].choice-1] > 26){
+                    if(min >= 14 && min <= 26){
+                        while(p[0].hand.cards[p[0].choice-1] < 14 || p[0].hand.cards[p[0].choice-1] > 26){
                             //prompt for new choice
                             cout << "Please play \u2662: ";
                                     cin >> p[0].choice; 
                             //recheck if choice is valid match
-                            if (p[0].hand.cards[p[0].choice-1] > 13 && p[0].hand.cards[p[0].choice-1] < 27){
+                            if (p[0].hand.cards[p[0].choice-1] >= 14 && p[0].hand.cards[p[0].choice-1] <= 26){
                                 valid = true;
                                 p[0].match = true;    
                             }
                         }
                     }
-                    else if (!repick){
+                    else if (min > 26){
                         //no matching cards, so any card will do
                         valid = true;
                         //but we didn't match
@@ -354,36 +324,36 @@ void play(Player *p, Show *pfv){
                 }
                 
                 //now check for Spades
-                else if((p[1].order == FIRST && (p[1].choice > 26 && p[1].choice < 40)) ||
-                        (p[2].order == FIRST && (p[2].choice > 26 && p[2].choice < 40)) ||
-                        (p[3].order == FIRST && (p[3].choice > 26 && p[3].choice < 40))) {                       
-                    //bool to check if there's a usable card
-                    bool repick = false;
+                else if((p[1].order == FIRST && (p[1].choice >= 27 && p[1].choice <= 39)) ||
+                        (p[2].order == FIRST && (p[2].choice >= 27 && p[2].choice <= 39)) ||
+                        (p[3].order == FIRST && (p[3].choice >= 27 && p[3].choice <= 39))) {                       
+                    //reset min again
+                    min = 53;
                     //choice is valid match
-                    if (p[0].hand.cards[p[0].choice-1] > 26 && p[0].hand.cards[p[0].choice-1] < 40){
+                    if (p[0].hand.cards[p[0].choice-1] >= 27 && p[0].hand.cards[p[0].choice-1] <= 39){
                         valid = true;
                         p[0].match = true;
                     }
                     //loop through all the cards to get the min & max
                     for (int n = 0; n < 13; n++){
-                        if(p[0].hand.cards[n] > 26 && p[0].hand.cards[n] < 40){
-                            repick = true;
+                        if(p[0].hand.cards[n] >= 27 && p[0].hand.cards[n] <= 39){
+                            min = p[0].hand.cards[n];
                         }
                     }
                     // else if there is a valid match that wasn't played
-                    if(repick){
-                        while(p[0].hand.cards[p[0].choice-1] < 27 && p[0].hand.cards[p[0].choice-1] > 39){
+                    if(min <= 39){
+                        while(p[0].hand.cards[p[0].choice-1] < 27 || p[0].hand.cards[p[0].choice-1] > 39){
                             //prompt for new choice
-                            cout << "Please play \u2662: ";
+                            cout << "Please play \u2660: ";
                                     cin >> p[0].choice; 
                             //recheck if choice is valid match
-                            if (p[0].hand.cards[p[0].choice-1] > 26 && p[0].hand.cards[p[0].choice-1] < 40){
+                            if (p[0].hand.cards[p[0].choice-1] >= 27 && p[0].hand.cards[p[0].choice-1] <= 39){
                                 valid = true;
                                 p[0].match = true;    
                             }
                         }
                     }
-                    else if (!repick){
+                    else if (min > 39){
                         //no matching cards, so any card will do
                         valid = true;
                         //but we didn't match
@@ -391,36 +361,36 @@ void play(Player *p, Show *pfv){
                     }
                 }
                 //last check for Hearts
-                else if((p[1].order == FIRST && p[1].choice > 39) ||
-                        (p[2].order == FIRST && p[2].choice > 39) ||
-                        (p[3].order == FIRST && p[3].choice > 39)) {                       
-                    //bool to check if there's a usable card
-                    bool repick = false;
+                else if((p[1].order == FIRST && p[1].choice >= 40) ||
+                        (p[2].order == FIRST && p[2].choice >= 40) ||
+                        (p[3].order == FIRST && p[3].choice >= 40)) {                       
+                    //reset min (it's actually max now)
+                    min = 1;
                     //choice is valid match
-                    if (p[0].hand.cards[p[0].choice-1] > 39){
+                    if (p[0].hand.cards[p[0].choice-1] >= 40){
                         valid = true;
                         p[0].match = true;
                     }
                     //loop through all the cards to get the min & max
                     for (int n = 0; n < 13; n++){
-                        if(p[0].hand.cards[n] > 39){
-                            repick = true;
+                        if(p[0].hand.cards[n] >= 40){
+                            min = p[0].hand.cards[n];
                         }
                     }
                     // else if there is a valid match that wasn't played
-                    if(repick){
-                        while(p[0].hand.cards[p[0].choice-1] < 39){
+                    if(min > 39){
+                        while(p[0].hand.cards[p[0].choice-1] < 40){
                             //prompt for new choice
-                            cout << "Please play \u2662: ";
+                            cout << "Please play \u2661: ";
                                     cin >> p[0].choice; 
                             //recheck if choice is valid match
-                            if (p[0].hand.cards[p[0].choice-1] > 39){
+                            if (p[0].hand.cards[p[0].choice-1] >= 40){
                                 valid = true;
                                 p[0].match = true;    
                             }
                         }
                     }
-                    else if (!repick){
+                    else if (min < 40){
                         //no matching cards, so any card will do
                         valid = true;
                         //but we didn't match
@@ -437,7 +407,7 @@ void play(Player *p, Show *pfv){
         else if (p[1].order == trick) {
         //    cout << "Larry's cards";
             print(p[1],pfv[1]);
-            playCard(p,pfv,1);
+            playCard(p,1);
             // Output the card played
             played(p[1], pfv[1]);
             // Set the played card for scoring
@@ -447,7 +417,7 @@ void play(Player *p, Show *pfv){
         else if (p[2].order == trick) {
         //    cout << "Curly's cards";
             print(p[2],pfv[2]);
-            playCard(p,pfv,2);
+            playCard(p,2);
             // Output the card played
             played(p[2], pfv[2]);
             // Set the played card for scoring
@@ -457,7 +427,7 @@ void play(Player *p, Show *pfv){
         else if (p[3].order == trick) {
         //    cout << "Curly's cards";
             print(p[3],pfv[3]);
-            playCard(p,pfv,3);
+            playCard(p,3);
             // Output the card played
             played(p[3], pfv[3]);
             // Set the played card for scoring
@@ -467,7 +437,7 @@ void play(Player *p, Show *pfv){
 }      
 
 //Stooge picks a card
-void playCard(Player *p, Show *pfv, int n){
+void playCard(Player *p, int n){
     bool chosen = false;
     // If npc is first to play in the trick - check for 2 clubs first
     if(p[n].order == FIRST) { 
@@ -578,7 +548,7 @@ void trick( Player *p){
     //curly was winner?
     winner == 2 ? p[2].order = FIRST,p[3].order = SECOND,p[0].order = THIRD,p[1].order = FOURTH :
     //else moe was the winner
-                  p[3].order = FIRST,p[0].order = SECOND,p[1].order = THIRD,p[2].order = FOURTH;
+    winner == 3 ? p[3].order = FIRST,p[0].order = SECOND,p[1].order = THIRD,p[2].order = FOURTH : 0;
     //assign the points to the winner
     p[winner].tScore += score;
     //check all 4 players
