@@ -187,7 +187,7 @@ void mSort(Player *p, Show *pfv){
 
 //Print out face values of player's hand
 void print(Player &p, Show &pfv){
-        if (count) {
+
         // output Player's remaining cards - if value is 0 an empty string is output
         cout << endl << "Play Card #:\t";
         if (p.hand.cards[0] == 0) { cout << ""; } else { cout << "1" << "\t"; }
@@ -209,7 +209,7 @@ void print(Player &p, Show &pfv){
             cout << pfv.pshow[j];
         }
         cout << endl;
-    }    
+    
 }      
 
 //Play the trick
@@ -577,9 +577,4 @@ void unset(Player &p, Show &pfv){
     if (p.choice == p.hand.cards[10]){ p.hand.cards[10] = 0; pfv.pshow[10] = "";}
     if (p.choice == p.hand.cards[11]){ p.hand.cards[11] = 0; pfv.pshow[11] = "";}
     if (p.choice == p.hand.cards[12]){ p.hand.cards[12] = 0; pfv.pshow[12] = "";}    
-}       
-
-//Counts how many tricks have been played
-void count(){
-    
-} 
+}        

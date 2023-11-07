@@ -39,14 +39,12 @@ void shuffle(int *, const int, Show *); //Shuffle the deck array (nested inside 
 int  linSrch(int *, const int);         //Find 2 of clubs  (nested inside deal) - deck array
 void mSort(Player *, Show *);           //Sort each player's hand (nested inside deal)
 void print(Player &, Show &);           //Print out face values of player's hand
-void choose(Player &);                  //Player card validation (not Stooge)
 void play(Player *, Show *);            //Play the trick           
 void playCard(Player *, int);           //Determine which card to play (Stooge)
 void played(Player &,Show &);           //Print out the cards played (nested inside playCard)
 void set(Player &);                     //Set the player's choice to card value (nested inside playCard)
 void trick(Player *);                   //Score the trick
 void unset(Player &, Show &);           //Set choice back & remove played card from hand (nested inside trick)
-void count();                           //Counts how many tricks have been played
 
 #endif /* HEARTS_H */
 

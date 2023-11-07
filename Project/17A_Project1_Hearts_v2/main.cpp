@@ -223,29 +223,27 @@ void mSort(Player *p, Show *pfv){
 
 //Print out face values of player's hand
 void print(Player &p, Show &pfv){
-        if (count) {
-        // output Player's remaining cards - if value is 0 an empty string is output
-        cout << endl << "Play Card #:\t";
-        if (p.hand.cards[0] == 0) { cout << ""; } else { cout << "1" << "\t"; }
-        if (p.hand.cards[1] == 0) { cout << ""; } else { cout << "2" << "\t"; }
-        if (p.hand.cards[2] == 0) { cout << ""; } else { cout << "3" << "\t"; }
-        if (p.hand.cards[3] == 0) { cout << ""; } else { cout << "4" << "\t"; }
-        if (p.hand.cards[4] == 0) { cout << ""; } else { cout << "5" << "\t"; }
-        if (p.hand.cards[5] == 0) { cout << ""; } else { cout << "6" << "\t"; }
-        if (p.hand.cards[6] == 0) { cout << ""; } else { cout << "7" << "\t"; }
-        if (p.hand.cards[7] == 0) { cout << ""; } else { cout << "8" << "\t"; }
-        if (p.hand.cards[8] == 0) { cout << ""; } else { cout << "9" << "\t"; }
-        if (p.hand.cards[9] == 0) { cout << ""; } else { cout << "10"<< "\t"; }
-        if (p.hand.cards[10]== 0) { cout << ""; } else { cout << "11"<< "\t"; }
-        if (p.hand.cards[11]== 0) { cout << ""; } else { cout << "12"<< "\t"; }
-        if (p.hand.cards[12]== 0) { cout << ""; } else { cout << "13"<< "\t"; }
-        // now output the remaining face values
-        cout << endl << setw(14) << "\t";
-        for (int j = 0; j < 13; j++) {
-            cout << pfv.pshow[j];
-        }
-        cout << endl;
-    }    
+    // output Player's remaining cards - if value is 0 an empty string is output
+    cout << endl << "Play Card #:\t";
+    if (p.hand.cards[0] == 0) { cout << ""; } else { cout << "1" << "\t"; }
+    if (p.hand.cards[1] == 0) { cout << ""; } else { cout << "2" << "\t"; }
+    if (p.hand.cards[2] == 0) { cout << ""; } else { cout << "3" << "\t"; }
+    if (p.hand.cards[3] == 0) { cout << ""; } else { cout << "4" << "\t"; }
+    if (p.hand.cards[4] == 0) { cout << ""; } else { cout << "5" << "\t"; }
+    if (p.hand.cards[5] == 0) { cout << ""; } else { cout << "6" << "\t"; }
+    if (p.hand.cards[6] == 0) { cout << ""; } else { cout << "7" << "\t"; }
+    if (p.hand.cards[7] == 0) { cout << ""; } else { cout << "8" << "\t"; }
+    if (p.hand.cards[8] == 0) { cout << ""; } else { cout << "9" << "\t"; }
+    if (p.hand.cards[9] == 0) { cout << ""; } else { cout << "10"<< "\t"; }
+    if (p.hand.cards[10]== 0) { cout << ""; } else { cout << "11"<< "\t"; }
+    if (p.hand.cards[11]== 0) { cout << ""; } else { cout << "12"<< "\t"; }
+    if (p.hand.cards[12]== 0) { cout << ""; } else { cout << "13"<< "\t"; }
+    // now output the remaining face values
+    cout << endl << setw(14) << "\t";
+    for (int j = 0; j < 13; j++) {
+        cout << pfv.pshow[j];
+    }
+    cout << endl;  
 }      
 
 //Play the trick
@@ -614,8 +612,3 @@ void unset(Player &p, Show &pfv){
     if (p.choice == p.hand.cards[11]){ p.hand.cards[11] = 0; pfv.pshow[11] = "";}
     if (p.choice == p.hand.cards[12]){ p.hand.cards[12] = 0; pfv.pshow[12] = "";}    
 }       
-
-//Counts how many tricks have been played
-void count(){
-    
-} 
