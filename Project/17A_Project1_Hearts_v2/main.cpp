@@ -475,9 +475,9 @@ void playCard(Player *p, int n){
     bool chosen = false;
     // If npc is first to play in the trick - check for 2 clubs first
     if(p[n].order == FIRST) { 
-        if ( p[n].hand.cards[0] == 1) {p[n].choice = 1; p[n].match = true;}
+        if ( p[n].hand.cards[0] == 1) {p[n].choice = 1; p[n].match = true; chosen = true;}
         // If no 2 clubs, play lowest card
-        else if (p[n].order == FIRST){
+        else {
             for(int i = 0; i < 13 && !chosen; i++){
                 if(p[n].hand.cards[i] != 0) { p[n].choice = i+1; chosen = true; p[n].match = true; }
             }
