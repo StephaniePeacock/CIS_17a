@@ -28,7 +28,6 @@ int main(int argc, char** argv) {
     //Declare all variables here
     
     //Initialize variables/input values
-    char saved;             //check if player wants to resume or save game
     fstream save,           //saved.bin - stream for save file
             cards,          //cards.bin - initial card values file
             fv;             //cards.dat - for storing face values
@@ -43,15 +42,6 @@ int main(int argc, char** argv) {
     strcpy(p[1].name,"Larry"); strcpy(p[2].name,"Curly"); strcpy(p[3].name,"Moe");
     //set all game scores to 0
     p[0].score = p[1].score = p[2].score = p[3].score = 0;  
-    //GET THE FACE VALUES OF THE DECK
-    fv.open("cards.dat", ios::in);
-    //just the player 1 values will be used
-    for(int i = 0; i < DECK; i++){
-       getline(fv,pfv[0].show[i]);
-    }
-    cout << endl;  
-    //close the file
-    fv.close();
     
     //INTRO
     cout << "Hey buddy, we need a fourth player!" << endl
