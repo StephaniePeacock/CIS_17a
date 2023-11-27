@@ -1,0 +1,35 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/StephaniePeacock/Project_2_Hearts.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+[pack]
+	buildbitmaps = false
+
+
+
+
+
+
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = StephaniePeacock
+	email = 127582902+StephaniePeacock@users.noreply.github.com
+
+
+
+
+
