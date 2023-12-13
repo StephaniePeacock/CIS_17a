@@ -40,13 +40,13 @@ struct Win {
 // Input function prototypes
 //Deal to each player - deck array & all players
 void deal(fstream &, fstream &, int *, Player *, const int, Show *);  
-void shuffle(int *, const int, Show *); //Shuffle the deck array (nested inside deal)
+ void shuffle(int *, const int, Show *); //Shuffle the deck array (nested inside deal)
 int  linSrch(int *, const int);         //Find 2 of clubs  (nested inside deal) - deck array
-void mSort(Player *, Show *);           //Sort each player's hand (nested inside deal)
-void print(Player &, Show &);           //Print out face values of player's hand
-void play(Player *, Show *);            //Play the trick           
-void playCard(Player *, int);           //Determine which card to play (Stooge)
-void played(Player &,Show &);           //Print out the cards played (nested inside playCard)
+ void mSort(Player *, Show *);           //Sort each player's hand (nested inside deal)
+ void print(Player &, Show &);           //Print out face values of player's hand
+ void play(Player *, Show *);            //Play the trick           
+ void playCard(Player *, int);           //Determine which card to play (Stooge)
+ void played(Player &,Show &);           //Print out the cards played (nested inside playCard)
 void set(Player &);                     //Set the player's choice to card value (nested inside playCard)
 void trick(Player *);                   //Score the trick
 void unset(Player &, Show &);           //Set choice back & remove played card from hand (nested inside trick)

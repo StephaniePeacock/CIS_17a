@@ -1,0 +1,45 @@
+\doxysection{hearts.\+h}
+\hypertarget{hearts_8h_source}{}\label{hearts_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ File:\ \ \ hearts.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Author:\ Stephanie\ Peacock}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created\ on\ November\ 25,\ 2023,\ 6:45\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ HEARTS\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ HEARTS\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//Constants}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DECK\ =\ 52;\ \ \ \ \textcolor{comment}{//constant\ number\ of\ cards}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{enum}\ Order\ \{FIRST,SECOND,THIRD,FOURTH\};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}\{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//C-\/String\ to\ hold\ player\ name}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ Order\ \ order;\ \ \ \ \ \ \ \ \textcolor{comment}{//To\ determine\ order\ for\ the\ trick\ \ \ \ }}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_card}{Card}}\ \ \ hand[13];\ \ \ \ \ \textcolor{comment}{//Holds\ the\ player's\ cards}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ choice;\ \ \ \ \ \ \ \textcolor{comment}{//Int\ value\ for\ the\ player's\ card}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ match;\ \ \ \ \ \ \ \ \textcolor{comment}{//Enforce\ suit}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ tScore;\ \ \ \ \ \ \ \textcolor{comment}{//Trick\ score}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ score;\ \ \ \ \ \ \ \ \textcolor{comment}{//Game\ score}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(\textcolor{keywordtype}{string});\ \ \ \ \ \textcolor{comment}{//Player\ Constructor}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ getName()\ \{\ \textcolor{keywordflow}{return}\ name;\ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setOrder(Order\ n)\ \{\ order\ =\ n;\ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ Order\ getOrder()\textcolor{keyword}{\ const\ \ }\{\textcolor{keywordflow}{return}\ order;\ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ addCard(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_card}{Card}}\&\ card);}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ Input\ function\ prototypes}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HEARTS\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00040\ }
+
+\end{DoxyCode}

@@ -1,0 +1,35 @@
+\doxysection{Player Struct Reference}
+\hypertarget{struct_player}{}\label{struct_player}\index{Player@{Player}}
+
+
+Collaboration diagram for Player\+:
+% FIG 0
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_player_a4af4a10433f33834b59d0c3793358a40}\label{struct_player_a4af4a10433f33834b59d0c3793358a40} 
+char \texorpdfstring{$\ast$}{*} {\bfseries name}
+\item 
+\Hypertarget{struct_player_a8abc0cc05181773e14523b80dd57c074}\label{struct_player_a8abc0cc05181773e14523b80dd57c074} 
+Order {\bfseries order}
+\item 
+\Hypertarget{struct_player_a4522bb87ecb08aff4b7e651ec869ab49}\label{struct_player_a4522bb87ecb08aff4b7e651ec869ab49} 
+\mbox{\hyperlink{struct_cards}{Cards}} {\bfseries hand}
+\item 
+\Hypertarget{struct_player_a0b3fffb35d19ef87fdde25e1f48a80e1}\label{struct_player_a0b3fffb35d19ef87fdde25e1f48a80e1} 
+int {\bfseries choice}
+\item 
+\Hypertarget{struct_player_aa549296bfa1f4f8ce06e748f5bb4c1fc}\label{struct_player_aa549296bfa1f4f8ce06e748f5bb4c1fc} 
+bool {\bfseries match}
+\item 
+\Hypertarget{struct_player_a990445ba9048bdaf2cc4c26e0588b23e}\label{struct_player_a990445ba9048bdaf2cc4c26e0588b23e} 
+int {\bfseries t\+Score}
+\item 
+\Hypertarget{struct_player_ace6abae8d66534ad0a1fd6458f786a6e}\label{struct_player_ace6abae8d66534ad0a1fd6458f786a6e} 
+int {\bfseries score}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+hearts.\+h\end{DoxyCompactItemize}

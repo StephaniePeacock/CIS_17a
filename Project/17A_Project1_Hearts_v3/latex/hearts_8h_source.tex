@@ -1,0 +1,61 @@
+\doxysection{hearts.\+h}
+\hypertarget{hearts_8h_source}{}\label{hearts_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ File:\ \ \ hearts.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Author:\ Stephanie\ Peacock}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created\ on\ October\ 24,\ 2023,\ 6:45\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ HEARTS\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ HEARTS\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//Constants}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DECK\ =\ 52;\ \ \ \ \textcolor{comment}{//constant\ number\ of\ cards}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//structures}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_cards}{Cards}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ cards[13];\ \ \ \ \ \ \textcolor{comment}{//Card\ values\ to\ determine\ trick\ winner\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00016\ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{enum}\ Order\ \{FIRST,SECOND,THIRD,FOURTH\};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_player}{Player}}\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{char}\ *name;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//C-\/String\ to\ hold\ player\ name}}
+\DoxyCodeLine{00022\ \ \ \ \ Order\ order;\ \ \ \ \ \ \ \ \textcolor{comment}{//To\ determine\ order\ for\ the\ trick\ \ \ \ }}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{struct_cards}{Cards}}\ hand;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Holds\ the\ player's\ cards}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ choice;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Int\ value\ for\ the\ player's\ card}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ match;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Enforce\ suit}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}\ tScore;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Trick\ score}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ score;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Game\ score}}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_show}{Show}}\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{string}\ pshow[13];\ \ \ \textcolor{comment}{//to\ correspond\ with\ the\ player\ structure\ \ \ \ }}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{string}\ show[DECK];\ \ \textcolor{comment}{//face\ values\ for\ the\ entire\ deck}}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_win}{Win}}\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{char}\ name[20];}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ score;}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ Input\ function\ prototypes}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//Deal\ to\ each\ player\ -\/\ deck\ array\ \&\ all\ players}}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ deal(fstream\ \&,\ fstream\ \&,\ \textcolor{keywordtype}{int}\ *,\ \mbox{\hyperlink{struct_player}{Player}}\ *,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int},\ \mbox{\hyperlink{struct_show}{Show}}\ *);\ \ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ shuffle(\textcolor{keywordtype}{int}\ *,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int},\ \mbox{\hyperlink{struct_show}{Show}}\ *);\ \textcolor{comment}{//Shuffle\ the\ deck\ array\ (nested\ inside\ deal)}}
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{int}\ \ linSrch(\textcolor{keywordtype}{int}\ *,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int});\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Find\ 2\ of\ clubs\ \ (nested\ inside\ deal)\ -\/\ deck\ array}}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ mSort(\mbox{\hyperlink{struct_player}{Player}}\ *,\ \mbox{\hyperlink{struct_show}{Show}}\ *);\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Sort\ each\ player's\ hand\ (nested\ inside\ deal)}}
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ print(\mbox{\hyperlink{struct_player}{Player}}\ \&,\ \mbox{\hyperlink{struct_show}{Show}}\ \&);\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Print\ out\ face\ values\ of\ player's\ hand}}
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ play(\mbox{\hyperlink{struct_player}{Player}}\ *,\ \mbox{\hyperlink{struct_show}{Show}}\ *);\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Play\ the\ trick\ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ playCard(\mbox{\hyperlink{struct_player}{Player}}\ *,\ \textcolor{keywordtype}{int});\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Determine\ which\ card\ to\ play\ (Stooge)}}
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ played(\mbox{\hyperlink{struct_player}{Player}}\ \&,\mbox{\hyperlink{struct_show}{Show}}\ \&);\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Print\ out\ the\ cards\ played\ (nested\ inside\ playCard)}}
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{void}\ set(\mbox{\hyperlink{struct_player}{Player}}\ \&);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ player's\ choice\ to\ card\ value\ (nested\ inside\ playCard)}}
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ trick(\mbox{\hyperlink{struct_player}{Player}}\ *);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Score\ the\ trick}}
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ unset(\mbox{\hyperlink{struct_player}{Player}}\ \&,\ \mbox{\hyperlink{struct_show}{Show}}\ \&);\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ choice\ back\ \&\ remove\ played\ card\ from\ hand\ (nested\ inside\ trick)}}
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{void}\ mSort(\mbox{\hyperlink{struct_win}{Win}}\ *);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Sort\ the\ winners}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HEARTS\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00056\ }
+
+\end{DoxyCode}

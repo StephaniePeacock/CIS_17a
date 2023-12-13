@@ -1,0 +1,31 @@
+\doxysection{Deck.\+h}
+\hypertarget{_deck_8h_source}{}\label{_deck_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ File:\ \ \ Card.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Author:\ Stephanie\ Peacock}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created\ on\ November\ 26,\ 2023,\ 9:46\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Purpose:\ Deck\ Class\ Specification}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ DECK\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ DECK\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Card.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_deck}{Deck}}\{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nCards;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_card}{Card}}\ **card;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_deck}{Deck}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//constructor\ -\/\ \#cards\ to\ make}}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_deck}{\string~Deck}}();\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//destructor}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ display();}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ shuffle();\ \ \ \ \ \textcolor{comment}{//shuffle\ the\ deck}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ \ \ \ void\ deal(Player\ \&\ p,\ int\ i,\ const\ Card\&\ n)\{\ p.addCard(n);\ \}}}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DECK\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00026\ }
+
+\end{DoxyCode}
