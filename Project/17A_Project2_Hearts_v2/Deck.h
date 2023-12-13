@@ -12,6 +12,7 @@
 #include "Card.h"
 
 class Player;   //So it knows they exist for Deal function
+class Stooge;
 
 class Deck{
     private:

@@ -43,6 +43,7 @@ void Deck::shuffle(){
 void Deck::display(){
     for(int i = 0; i < nCards; i++){
         cout << card[i]->getFace();
+    //    cout << " Card value is " << card[i]->getCnum();
         if((i+1)%4 == 0){
             cout << endl;
         }
@@ -51,7 +52,7 @@ void Deck::display(){
 Card Deck::deal(int i){
     return *card[i]; 
 }
-
+//linear search to fine 2 clubs
 int Deck::linSrch(){
     int indx = 0;
     // start off with false

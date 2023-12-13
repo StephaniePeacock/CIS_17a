@@ -18,7 +18,7 @@ class AbsPlayer {
     private:
         
     public:
-        virtual void play(Player &, Stooge **, int) = 0;  //pick a card - setChoice nested
+        virtual void play(Player &, Stooge **) = 0;  //pick a card - setChoice nested
         virtual void mSort() = 0;   //sort the cards
         virtual void print() = 0;   //print out the hand array
         virtual void played() = 0;  //print out name & what was played

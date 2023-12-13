@@ -18,6 +18,7 @@ using namespace std;
 
 //Class Functions - to be moved
 void order(Player &, Stooge **);
+void trick(Player &, Stooge **);
 
 //Execution Begins Here
 int main(int argc, char** argv) {
@@ -51,7 +52,9 @@ int main(int argc, char** argv) {
     //finish intro
     cout << "Alright " << p.getName() << ", let's play Hearts! I'll deal." << endl;
     
-    // deck.display();
+  //   deck.display();
+    
+    p.setChoice(3);
     
     /************************
      *                      *
@@ -109,43 +112,54 @@ int main(int argc, char** argv) {
         }
         //set the order & initial match status & tScores to 0
         order(p,s);
-        
-        
         //begin hand loop - go 13 times
         for(int i = 0; i < 13; i++){
+            //each player plays
+            for(int n = 0; n < 4; n++){
+                //player checks 3 - dont go out of bounds
+                if(n != 3){
+                    if(s[n]->getOrder() == n){
+                        s[n]->play(p,s);
+                        s[n]->played();
+                    }     
+                }
+                //stooges check 0 1 2
+                else {
+                    //pick a card
+                    p.play(p,s);
+                    
+                    cout << "Choice is currently " << p.getChoice() << endl;
+                    p.setChoice(13);
+                    cout << "now Choice is currently " << p.getChoice() << endl;
+                    //output played card
+                    p.played();
+                    ;
+                }
+            }
+            //score the trick
+            trick(p,s);
+            //discard the cards that were played
+            p.discard(p.getChoice());
+            s[0]->discard(s[0]->getChoice());
+            s[1]->discard(s[1]->getChoice());
+            s[2]->discard(s[2]->getChoice());
             
+      //  cout << "2 Clubs card value is "   << deck.card[0]->getCnum() << endl; 
         }
+        //check for shooting the moon
+        //add tScores to score
+        //output current game scores
+        
         //print out player's cards
    // }while(p.getScore() < 50 && 
     //        s[0]->getScore() < 50 && 
     //        s[1]->getScore() < 50 &&
     //        s[2]->getScore() < 50);
 
-    
+        
+        //someone hit 50 points, let's find the winner
     
  
-    
-
-    
-    cout << "2 clubs found at element " << deck.linSrch() << endl;
-    cout << p.getName() << endl;
-    p.print();
-    
-    cout << endl << s[0]->getName() << endl;
-    s[0]->print();
-    cout << endl << s[1]->getName() << endl;
-    s[1]->print();
-    cout << endl << s[2]->getName() << endl;
-    s[2]->print();
-    
-    cout << "Player Order is " << p.getOrder() << " : Larry Order is " << s[0]->getOrder()
-         << " : Curly Order is " << s[1]->getOrder() << " : Moe Order is " << s[2]->getOrder() << endl;
-    
-  //  p.discard(2);
-  //  p.print();
-    
-  //  p.play(p,s,3);
-  //  s[1]->play(p,s,3);
     
     
     
@@ -196,4 +210,82 @@ void order(Player &p, Stooge **s){
             s[1]->setOrder(FOURTH); s[1]->setMatch(false);  s[1]->setTrick(0);
             cout << "Moe first Player order is " << p.getOrder() << endl;
         }
+}
+//score the trick
+void trick(Player &p, Stooge **s){
+    //local counters
+    int tempscore = 0,  //holds the trick points
+        max = 0,    //hold the highest card value
+        winner;     //holds the winner's location
+    //loop through all four players
+    for(int i = 0; i < 3; i++){
+        //dont go out of bounds
+        if(s[i]->getMatch() == true && s[i]->getCard(s[i]->getChoice()) > max){
+            //set their choice to the max
+            max = s[i]->getCard(s[i]->getChoice());
+            //set them as winner
+            winner = i;
+        }
+        //now see if there was a heart played
+        if(s[i]->getCard(s[i]->getChoice()) > 38){
+            //add 1 to the trick value
+            tempscore += 1;
+        }
+        //last check if the Q Spades was played
+        if(s[i]->getCard(s[i]->getChoice()) == 36){
+            tempscore += 13;
+        }
+    }
+
+    //now check the player
+   if(p.getMatch() == true && p.getCard(p.getChoice()) > max){
+    //set their choice to the max
+    max = p.getCard(p.getChoice());
+    //set them as winner
+    winner = 3;
+    }
+    //now see if there was a heart played
+    if(p.getCard(p.getChoice()) > 38){
+        //add 1 to the trick value
+        tempscore += 1;
+    }
+    //last check if the Q Spades was played
+    if(p.getCard(p.getChoice()) == 36){
+        tempscore += 13;
+    }
+
+    
+    
+    //output the trick value
+    cout << endl << "Trick is worth " << tempscore << " points. ";
+    //output the winner & add the points
+    if(winner = 3){
+        cout << p.getName() << " takes the trick." << endl << endl;
+        p.setTrick(tempscore);
+    }else{
+        cout << s[winner]->getName() << " takes the trick." << endl << endl;
+        s[winner]->setTrick(tempscore);
+    }
+    
+    //set the new order - player was winner?
+    winner == 3 ? p.setOrder(FIRST),s[0]->setOrder(SECOND),s[1]->setOrder(THIRD),s[2]->setOrder(FOURTH) :
+    //larry was winner?
+    winner == 0 ? s[0]->setOrder(FIRST),s[1]->setOrder(SECOND),s[2]->setOrder(THIRD),p.setOrder(FOURTH) :
+    //curly was winner?
+    winner == 1 ? s[1]->setOrder(FIRST),s[2]->setOrder(SECOND),p.setOrder(THIRD),s[0]->setOrder(FOURTH) :
+    //else moe was the winner
+                  s[2]->setOrder(FIRST),p.setOrder(SECOND),s[0]->setOrder(THIRD),s[1]->setOrder(FOURTH);
+    //check all 4 players
+    for(int i = 0; i < 4; i++){
+        if(i == 3){
+            p.setMatch(false);
+            cout << p.getName() <<"'s hand is " << p.getTrick() << "\t";
+        }else{
+            //reset match for all
+            s[i]->setMatch(false);
+            //for testing - output all hand values
+            cout << s[i]->getName() <<"'s hand is " << s[i]->getTrick() << "\t";    
+        }   
+    }
+    cout << endl;
 }

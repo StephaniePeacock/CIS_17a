@@ -19,6 +19,7 @@ class Card{
     public:
         Card() : cnum(0),face(""), suit(0){}
         Card(int);
+        virtual ~Card(){}
         void setFace();
         string getFace()     { return face; }
         int  getCnum()       { return cnum; }

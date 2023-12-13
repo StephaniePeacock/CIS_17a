@@ -15,7 +15,7 @@ using namespace std;
 
 enum Order {FIRST,SECOND,THIRD,FOURTH};
 
-//class Stooge;   //Forward Declare Stooge
+class Stooge;   //Forward Declare Stooge
 
 class Player : public AbsPlayer {
 private:
@@ -38,42 +38,23 @@ public:
     void setOrder(Order ord){ order = ord;}
     void setChoice(int c)   { choice = c; }
     void setMatch(bool m)   { match = m;  }
-    void setTrick(int t)    { tScore = t; }
+    void setTrick(int t)    { tScore += t;}
+    void resetTrick()       { tScore = 0; }
     void setScore(int sc)   { score = sc; }
     //Accessors
-    string getName()  { return name;  }
-    Order  getOrder() { return order; }
-    int    getChoice(){ return choice;}
-    bool   getMatch() { return match; }
-    int    getTrick() { return tScore;}
-    int    getScore() { return score; }
-    int    getSize()  { return size;  }
+    string getName()        { return name;   }
+    Order  getOrder()       { return order;  }
+    int    getChoice()      { return choice; }
+    bool   getMatch()       { return match;  }
+    int    getTrick()       { return tScore; }
+    int    getScore()       { return score;  }
+    int    getSize()        { return size;   }
+    int    getCard(int i)   { return hand[i].getCnum();}
     //Other Functions
-    void play(Player &, Stooge **, int) { cout << "Player played." << endl; }
-    void mSort(){
-        for(int j = 0; j < 13; j++){
-            for(int i = j + 1; i < 13; i++){
-                if(hand[j] > hand[i]){
-                    //sort the player int values
-                    Card temp = hand[j];
-                    hand[j] = hand[i];
-                    hand[i] = temp;
-                }
-            }
-        }
-    }
-    void print(){
-        cout << endl << "Play Card #:\t";
-        for(int i = 0; i < getSize(); i++){
-           cout << i+1 << "\t";
-        }
-        cout << endl << setw(14) << "\t";
-        for(int i = 0; i < getSize(); i++){
-           cout << hand[i].getFace() << "\t";
-        }
-        cout << endl;
-    }
-    void played(){}
+    virtual void play(Player &, Stooge **);
+    void mSort();
+    void print();
+    void played(){ cout << getName() << " played " << hand[choice].getFace();}
     
 };
 

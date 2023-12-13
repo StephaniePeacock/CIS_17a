@@ -9,7 +9,13 @@
         <group>
             <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/Player.cpp</file>
             <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/Player.h</file>
+            <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/Deck.cpp</file>
             <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/main.cpp</file>
+            <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/Card.h</file>
+            <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/Stooge.h</file>
+            <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/Stooge.cpp</file>
+            <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/Deck.h</file>
+            <file>file:/C:/Git/CIS_17a/Project/17A_Project2_Hearts_v2/AbsPlayer.h</file>
         </group>
     </open-files>
 </project-private>
