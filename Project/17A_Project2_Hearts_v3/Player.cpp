@@ -105,35 +105,38 @@ void Player::play(Player &p, Stooge **s) {
     //print the cards (player only)
     print();
     
-    p.setOrder(FIRST);
     //repeat until we've found a valid choice
     do { 
         while (num < 1 || num > p.getSize()){
             cout << "Choose a card in your hand you wish to play: ";
             cin >> num; 
         }
-        //player has 2 clubs
-        if(p.hand[0].getCnum() == 0){
-            //2 clubs validation
-            while(num != 1){
-                //player has 2 clubs and didnt play it
-                cout << "Please play 2\u2663: ";
-                cin >> num;
-                //player chose 2 clubs
-                if(num == 1){
-                    //num is valid - set all the things
-                    p.setMatch(true);
-                    p.setChoice(num-1);
-                    valid = true;
-                    getChoice();
-                }
-            }    
-        }
-        //player first, no 2 clubs - play whatever you want
-        else if(p.order == FIRST && !valid){
-            p.setMatch(true);
-            p.setChoice(num-1);
-            valid = true;
+        //player is first
+        if(p.getOrder() == FIRST){
+            //player has 2 clubs
+            if(p.getCardVal(0) == 0){
+                //2 clubs validation
+                while(num != 1){
+                    //player has 2 clubs and didnt play it
+                    cout << "Please play 2\u2663: ";
+                    cin >> num;
+                    //player chose 2 clubs
+                    if(num == 1){
+                        //num is valid - set all the things
+                        p.setMatch(true);
+                        p.setChoice(num-1);
+                        valid = true;
+                        getChoice();
+                    }
+                }    
+            }
+            //player first, no 2 clubs - play whatever you want
+            else {
+                cout << "card set" << endl
+                p.setMatch(true);
+                p.setChoice(num-1);
+                valid = true;
+            }
         }
         // Add suit validation if not first player
         // Check for Clubs
@@ -142,7 +145,7 @@ void Player::play(Player &p, Stooge **s) {
            (s[1]->getOrder() == FIRST && s[1]->getCardSuit(s[1]->getChoice()) == 0) ||
            (s[2]->getOrder() == FIRST && s[2]->getCardSuit(s[2]->getChoice()) == 0)) {                       
             //choice is valid match
-            if (p.hand[num].getSuit() == 0){
+            if (p.getCardSuit(num) == 0){
                 valid = true;
                 p.setMatch(true);
                 p.setChoice(num-1);
@@ -150,20 +153,20 @@ void Player::play(Player &p, Stooge **s) {
             }
             if(!valid){
                 //loop through all the cards to get the min
-                for (int n = 0; n < p.size; n++){
-                    if(p.hand[n].getSuit() == 0){
+                for (int n = 0; n < p.getSize(); n++){
+                    if(p.getCardSuit(n) == 0){
                         min = 12;
                     }
                 }
                 // else if there is a valid match that wasn't played
                 if(min == 12){
-                    while(p.hand[num].getSuit() != 0){
+                    while(p.getCardSuit(num) != 0){
                         //prompt for new choice
                         cout << "Please play \u2663: ";
                         cin >> num; 
                         //recheck if choice is valid match
-                        if(num > 0 || num < p.size){
-                            if (p.hand[num].getSuit() == 0){
+                        if(num > 0 || num < p.getSize()){
+                            if (p.getCardSuit(num) == 0){
                                 valid = true;
                                 p.setMatch(true);
                                 p.setChoice(num-1);
@@ -177,7 +180,7 @@ void Player::play(Player &p, Stooge **s) {
                     //no matching cards, so any card will do
                     valid = true;
                     //but we didn't match
-                    p.match = false;
+                    p.setMatch(false);
                     p.setChoice(num-1);
                 }
             }
@@ -190,30 +193,30 @@ void Player::play(Player &p, Stooge **s) {
             //reset min to original value
             min = 53;
             //choice is valid match
-            if (p.hand[num].getSuit() == 1){
+            if (p.getCardSuit(num) == 1){
                 valid = true;
                 p.setMatch(true);
-                p.choice = (num-1);
+                p.setChoice(num-1);
             }
             if(!valid){
                 //loop through all the cards to get the min & max
-                for (int n = 0; n < p.size; n++){
-                    if(p.hand[n].getSuit() == 1){
+                for (int n = 0; n < p.getSize(); n++){
+                    if(p.getCardSuit(n) == 1){
                         min = 25;
                     }
                 }
                 // else if there is a valid match that wasn't played
                 if(min == 25){
-                    while(p.hand[num].getSuit() != 1){
+                    while(p.getCardSuit(num) != 1){
                         //prompt for new choice
                         cout << "Please play \u2662: ";
                         cin >> num; 
                         //recheck if choice is valid match
-                        if(num > 0 && num < p.size){
-                            if (p.hand[num].getSuit() == 1){
+                        if(num > 0 && num < p.getSize()){
+                            if (p.getCardSuit(num) == 1){
                                 valid = true;
                                 p.setMatch(true); 
-                                p.choice = (num-1);
+                                p.setChoice(num-1);
                             }
                         }  
                     }
@@ -222,8 +225,8 @@ void Player::play(Player &p, Stooge **s) {
                     //no matching cards, so any card will do
                     valid = true;
                     //but we didn't match
-                    p.match = false;  
-                    p.choice = (num-1);
+                    p.setMatch(false);  
+                    p.setChoice(num-1);
                 }
             }
         }
@@ -236,30 +239,30 @@ void Player::play(Player &p, Stooge **s) {
             //reset min to original value
             min = 53;
             //choice is valid match
-            if (p.hand[num].getSuit() == 2){
+            if (p.getCardSuit(num) == 2){
                 valid = true;
                 p.setMatch(true);
-                p.choice = (num-1);
+                p.setChoice(num-1);
             }
             if(!valid){
                 //loop through all the cards to get the min & max
-                for (int n = 0; n < p.size; n++){
-                    if(p.hand[n].getSuit() == 2){
+                for (int n = 0; n < p.getSize(); n++){
+                    if(p.getCardSuit(n) == 2){
                         min = 38;
                     }
                 }
                 // else if there is a valid match that wasn't played
                 if(min == 38){
-                    while(p.hand[num].getSuit() != 2){
+                    while(p.getCardSuit(num) != 2){
                         //prompt for new choice
                         cout << "Please play \u2660: ";
                         cin >> num; 
                         //recheck if choice is valid match
-                        if(num > 0 && num < p.size){
-                            if (p.hand[num].getSuit() == 2){
+                        if(num > 0 && num < p.getSize()){
+                            if (p.getCardSuit(num) == 2){
                                 valid = true;
                                 p.setMatch(true); 
-                                p.choice = (num-1);
+                                p.setChoice(num-1);
                             }
                         }  
                     }
@@ -268,8 +271,8 @@ void Player::play(Player &p, Stooge **s) {
                     //no matching cards, so any card will do
                     valid = true;
                     //but we didn't match
-                    p.match = false;  
-                    p.choice = (num-1);
+                    p.setMatch(false);  
+                    p.setChoice(num-1);
                 }
             }
         }
@@ -281,30 +284,30 @@ void Player::play(Player &p, Stooge **s) {
             //reset min to original value
             min = 53;
             //choice is valid match
-            if (p.hand[num].getSuit() == 3){
+            if (p.getCardSuit(num) == 3){
                 valid = true;
                 p.setMatch(true);
-                p.choice = (num-1);
+                p.setChoice(num-1);
             }
             if(!valid){
                 //loop through all the cards to get the min & max
-                for (int n = 0; n < p.size; n++){
-                    if(p.hand[n].getSuit() == 3){
+                for (int n = 0; n < p.getSize(); n++){
+                    if(p.getCardSuit(n) == 3){
                         min = 25;
                     }
                 }
                 // else if there is a valid match that wasn't played
                 if(min == 25){
-                    while(p.hand[num].getSuit() != 3){
+                    while(p.getCardSuit(num) != 3){
                         //prompt for new choice
                         cout << "Please play \u2661: ";
                         cin >> num; 
                         //recheck if choice is valid match
-                        if(num > 0 && num < p.size){
-                            if (p.hand[num].getSuit() == 3){
+                        if(num > 0 && num < p.getSize()){
+                            if (p.getCardSuit(num) == 3){
                                 valid = true;
                                 p.setMatch(true); 
-                                p.choice = (num-1);
+                                p.setChoice(num-1);
                             }
                         }  
                     }
@@ -313,12 +316,11 @@ void Player::play(Player &p, Stooge **s) {
                     //no matching cards, so any card will do
                     valid = true;
                     //but we didn't match
-                    p.match = false;  
-                    p.choice = (num-1);
+                    p.setMatch(false);  
+                    p.setChoice(num-1);
                 }
             }
         }  
     }while(!valid); 
-   cout << "Inside play Choice is currently " << p.getChoice() << endl;
 }
 

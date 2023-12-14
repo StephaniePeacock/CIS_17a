@@ -40,7 +40,7 @@ public:
             //player is first 
             cout << "player was first - checking for a match" << endl;
             // match the suit if possible - playing lowest card possible
-            while(val < getSize() && !chosen) {
+            while(!chosen && val < getSize()) {
                 if (getCardSuit(val) == p.getCardSuit(p.getChoice())) {
                     cout << "match found for player" << endl;
                     setChoice(val); chosen = true; setMatch(true);
@@ -53,7 +53,7 @@ public:
         if(!chosen && s[0]->getOrder() == FIRST) {
             cout << "larry was first - checking for a match" << endl;
         // match the suit if possible - playing lowest card possible  
-            while(val < getSize() && !chosen) {
+            while(!chosen && val < getSize()) {
                 if (getCardSuit(val) == s[0]->getCardSuit(s[0]->getChoice())) {
                     cout << "match found for larry" << endl;
                     setChoice(val); chosen = true; setMatch(true); 
@@ -67,7 +67,7 @@ public:
             cout << "curly was first - checking for a match" << endl
                  << " curly played suit number: " << s[1]->getCardSuit(s[1]->getChoice()) << endl;
             // match the suit if possible - playing lowest card possible 
-            while(val < getSize() && !chosen) {
+            while(!chosen && val < getSize()) {
                 if (getCardSuit(val) == s[1]->getCardSuit(s[1]->getChoice())) {
                     cout << "match found for curly" << endl;
                     cout << "played suit number : " << getCardSuit(getChoice()) << endl;
@@ -81,7 +81,7 @@ public:
         if(!chosen && s[2]->getOrder() == FIRST) {
             cout << "moe was first - checking for a match" << endl;
             // match the suit if possible - playing lowest card possible    
-            while(val < getSize() && !chosen) {
+            while(!chosen && val < getSize()) {
                 if (getCardSuit(val) == s[2]->getCardSuit(s[2]->getChoice())) {
                     cout << "match found for moe" << endl;
                     setChoice(val); chosen = true; setMatch(true); 
@@ -94,8 +94,8 @@ public:
             cout << "unable to match checking for q spades" << endl;
             for (int j = getSize(); j > 0 && !chosen; j--) {
                 if (getCardVal(j) == 36) {setChoice(j); chosen = true; setMatch(false);}
-                if (getCardVal(j) == 38) {setChoice(j); chosen = true; setMatch(false);}
-                if (getCardVal(j) == 37) {setChoice(j); chosen = true; setMatch(false);}
+                else if (getCardVal(j) == 38) {setChoice(j); chosen = true; setMatch(false);}
+                else if (getCardVal(j) == 37) {setChoice(j); chosen = true; setMatch(false);}
             }
         }
         // Lastly, play the highest card available   

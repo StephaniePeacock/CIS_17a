@@ -11,7 +11,7 @@
 Card::Card(int n) {
     //loop #  or start at 0
     cnum = ( n > 0 ? n : 0);
-    suit = cnum%13;
+    suit = (cnum/13);
     face;
 }
 
@@ -27,5 +27,5 @@ void Card::setFace(){
                     "\u2661"};   // Hearts
     face  = faces[cnum%13];
     face += suits[cnum/13];
-    suit = cnum/13;
+   
 }
