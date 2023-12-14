@@ -14,6 +14,8 @@ enum Order {FIRST,SECOND,THIRD,FOURTH};
 
 // Input function prototypes
 void trick();
+void deal(Player, Stooge *, Deck);
+
 
 #endif /* HEARTS_H */
 

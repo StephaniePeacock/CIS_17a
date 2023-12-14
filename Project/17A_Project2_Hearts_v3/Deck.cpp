@@ -23,6 +23,7 @@ Deck::Deck() {
     for(int i = 0; i < nCards; i++){
         card[i] = new Card(i);
         card[i]->setFace();
+        card[i]->setFace();
     }
 }
 //Deck Destructor
@@ -42,10 +43,26 @@ void Deck::shuffle(){
 //print Deck
 void Deck::display(){
     for(int i = 0; i < nCards; i++){
-        cout << card[i]->getFace() << endl;
+        cout << card[i]->getFace();
+    //    cout << " Card value is " << card[i]->getCnum();
+        if((i+1)%4 == 0){
+            cout << endl;
+        }
     }
 }
 Card Deck::deal(int i){
-    
-   return *card[i]; 
+    return *card[i]; 
+}
+//linear search to fine 2 clubs
+int Deck::linSrch(){
+    int indx = 0;
+    // start off with false
+    bool found = false;
+    // run until the val is found or we run through all the numbers
+    while (indx < nCards && !found){
+        // if the val is found it returns true and stops the loop, if false it adds to the count
+        card[indx]->getCnum() == 0 ?  found = true : indx++;
+    }
+    // sends back what index 2 of clubs (1) was found at
+    return indx;
 }

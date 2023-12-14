@@ -12,6 +12,7 @@
 #include "Card.h"
 
 class Player;   //So it knows they exist for Deal function
+class Stooge;
 
 class Deck{
     private:
@@ -20,10 +21,11 @@ class Deck{
     public:
         Deck();             //constructor - #cards to make
         ~Deck();            //destructor
+        int getNCards() { return nCards; }
         void display();
         void shuffle();     //shuffle the deck
-        Card deal(int);        // Deal a card to a player
-    
+        Card deal(int);     // Deal a card to a player
+        int linSrch();      //find where the 2 clubs is, so we can set order
 };
 
 #endif /* DECK_H */

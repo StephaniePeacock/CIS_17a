@@ -19,20 +19,31 @@ class Card{
     public:
         Card() : cnum(0),face(""), suit(0){}
         Card(int);
+        virtual ~Card(){}
         void setFace();
         string getFace()     { return face; }
         int  getCnum()       { return cnum; }
         int  getSuit()       { return suit; }
         //other functions
         bool operator <(const Card &right) const {  //for scoring & sorting
-            return cnum < right.cnum;
+            return this->cnum < right.cnum;
         }
         bool operator >(const Card &right) const {  //for scoring & sorting
-            return cnum > right.cnum;
+            return this->cnum > right.cnum;
         }
         bool operator ==(const Card &right) const { //for setting match status
-            return suit == right.suit;
+            return this->suit == right.suit;
         }
+        bool operator !=(const Card &right) const { //for setting match status
+            return this->suit == right.suit;
+        }
+        
+    //    Card & operator =(const Card &right) { //for setting match status
+    //        if(this->cnum != right.cnum){
+    //            cnum = right.cnum;
+    //        }
+    //        return *this;
+    //    }
 };
 
 #endif /* CARD_H */

@@ -23,6 +23,7 @@ Deck::Deck() {
     for(int i = 0; i < nCards; i++){
         card[i] = new Card(i);
         card[i]->setFace();
+        card[i]->setFace();
     }
 }
 //Deck Destructor

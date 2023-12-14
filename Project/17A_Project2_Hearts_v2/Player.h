@@ -42,19 +42,20 @@ public:
     void resetTrick()       { tScore = 0; }
     void setScore(int sc)   { score = sc; }
     //Accessors
-    string getName()        { return name;   }
-    Order  getOrder()       { return order;  }
-    int    getChoice()      { return choice; }
-    bool   getMatch()       { return match;  }
-    int    getTrick()       { return tScore; }
-    int    getScore()       { return score;  }
-    int    getSize()        { return size;   }
-    int    getCard(int i)   { return hand[i].getCnum();}
+    string getName()  const       { return name;   }
+    Order  getOrder() const       { return order;  }
+    int    getChoice()const       { return choice; }
+    bool   getMatch() const       { return match;  }
+    int    getTrick() const       { return tScore; }
+    int    getScore() const       { return score;  }
+    int    getSize()  const       { return size;   }
+    int    getCardSuit(int i)const   { return hand[i].getSuit();}
+    int    getCardVal(int i) const   { return hand[i].getCnum();}
     //Other Functions
     virtual void play(Player &, Stooge **);
     void mSort();
     void print();
-    void played(){ cout << getName() << " played " << hand[choice].getFace();}
+    void played(){ cout << getName() << " played " << hand[getChoice()].getFace();}
     
 };
 

@@ -27,4 +27,5 @@ void Card::setFace(){
                     "\u2661"};   // Hearts
     face  = faces[cnum%13];
     face += suits[cnum/13];
+    suit = cnum/13;
 }
