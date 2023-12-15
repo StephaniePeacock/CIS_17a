@@ -96,11 +96,22 @@ for(int i = 0; i < getSize(); i++){
    cout << hand[i].getCnum() << "\t";
 }
 cout << endl;
+
+//for testing
+cout <<  setw(14) << "\t";
+for(int i = 0; i < getSize(); i++){
+   cout << hand[i].getSuit() << "\t";
+}
+cout << endl;
+
+
+
 }
 void Player::play(Player &p, Stooge **s) {
     //temp variables
     int min = 53; //too big on purpose
     bool valid = false;
+    bool repick = true;
     int num = 0;
     //print the cards (player only)
     print();
@@ -131,8 +142,8 @@ void Player::play(Player &p, Stooge **s) {
                 }    
             }
             //player first, no 2 clubs - play whatever you want
-            else {
-                cout << "card set" << endl
+            else if (p.getCardVal(0) != 0) {
+                cout << "card set" << endl;
                 p.setMatch(true);
                 p.setChoice(num-1);
                 valid = true;
@@ -145,7 +156,7 @@ void Player::play(Player &p, Stooge **s) {
            (s[1]->getOrder() == FIRST && s[1]->getCardSuit(s[1]->getChoice()) == 0) ||
            (s[2]->getOrder() == FIRST && s[2]->getCardSuit(s[2]->getChoice()) == 0)) {                       
             //choice is valid match
-            if (p.getCardSuit(num) == 0){
+            if (p.getCardSuit(num-1) == 0){
                 valid = true;
                 p.setMatch(true);
                 p.setChoice(num-1);
@@ -155,28 +166,29 @@ void Player::play(Player &p, Stooge **s) {
                 //loop through all the cards to get the min
                 for (int n = 0; n < p.getSize(); n++){
                     if(p.getCardSuit(n) == 0){
-                        min = 12;
+                        repick = true;
                     }
                 }
                 // else if there is a valid match that wasn't played
-                if(min == 12){
-                    while(p.getCardSuit(num) != 0){
+                if(repick){
+                    while(p.getCardSuit(num-1) != 0){
                         //prompt for new choice
                         cout << "Please play \u2663: ";
                         cin >> num; 
                         //recheck if choice is valid match
                         if(num > 0 || num < p.getSize()){
-                            if (p.getCardSuit(num) == 0){
+                            if (p.getCardSuit(num-1) == 0){
                                 valid = true;
                                 p.setMatch(true);
                                 p.setChoice(num-1);
                                 p.getChoice();
+                                repick = false;
                             }    
                         }
                         
                     }
                 }
-                else if (min != 12){
+                else if (!repick){
                     //no matching cards, so any card will do
                     valid = true;
                     //but we didn't match
@@ -193,7 +205,7 @@ void Player::play(Player &p, Stooge **s) {
             //reset min to original value
             min = 53;
             //choice is valid match
-            if (p.getCardSuit(num) == 1){
+            if (p.getCardSuit(num-1) == 1){
                 valid = true;
                 p.setMatch(true);
                 p.setChoice(num-1);
@@ -202,26 +214,27 @@ void Player::play(Player &p, Stooge **s) {
                 //loop through all the cards to get the min & max
                 for (int n = 0; n < p.getSize(); n++){
                     if(p.getCardSuit(n) == 1){
-                        min = 25;
+                        repick = true;
                     }
                 }
                 // else if there is a valid match that wasn't played
-                if(min == 25){
-                    while(p.getCardSuit(num) != 1){
+                if(repick){
+                    while(p.getCardSuit(num-1) != 1){
                         //prompt for new choice
                         cout << "Please play \u2662: ";
                         cin >> num; 
                         //recheck if choice is valid match
                         if(num > 0 && num < p.getSize()){
-                            if (p.getCardSuit(num) == 1){
+                            if (p.getCardSuit(num-1) == 1){
                                 valid = true;
                                 p.setMatch(true); 
                                 p.setChoice(num-1);
+                                repick = false;
                             }
                         }  
                     }
                 }
-                else if (min != 25){
+                else if (!repick){
                     //no matching cards, so any card will do
                     valid = true;
                     //but we didn't match
@@ -239,7 +252,7 @@ void Player::play(Player &p, Stooge **s) {
             //reset min to original value
             min = 53;
             //choice is valid match
-            if (p.getCardSuit(num) == 2){
+            if (p.getCardSuit(num-1) == 2){
                 valid = true;
                 p.setMatch(true);
                 p.setChoice(num-1);
@@ -248,26 +261,27 @@ void Player::play(Player &p, Stooge **s) {
                 //loop through all the cards to get the min & max
                 for (int n = 0; n < p.getSize(); n++){
                     if(p.getCardSuit(n) == 2){
-                        min = 38;
+                        repick = true;
                     }
                 }
                 // else if there is a valid match that wasn't played
-                if(min == 38){
-                    while(p.getCardSuit(num) != 2){
+                if(repick){
+                    while(p.getCardSuit(num-1) != 2){
                         //prompt for new choice
                         cout << "Please play \u2660: ";
                         cin >> num; 
                         //recheck if choice is valid match
                         if(num > 0 && num < p.getSize()){
-                            if (p.getCardSuit(num) == 2){
+                            if (p.getCardSuit(num-1) == 2){
                                 valid = true;
                                 p.setMatch(true); 
                                 p.setChoice(num-1);
+                                repick = false;
                             }
                         }  
                     }
                 }
-                else if (min != 38){
+                else if (!repick){
                     //no matching cards, so any card will do
                     valid = true;
                     //but we didn't match
@@ -284,7 +298,7 @@ void Player::play(Player &p, Stooge **s) {
             //reset min to original value
             min = 53;
             //choice is valid match
-            if (p.getCardSuit(num) == 3){
+            if (p.getCardSuit(num-1) == 3){
                 valid = true;
                 p.setMatch(true);
                 p.setChoice(num-1);
@@ -293,26 +307,27 @@ void Player::play(Player &p, Stooge **s) {
                 //loop through all the cards to get the min & max
                 for (int n = 0; n < p.getSize(); n++){
                     if(p.getCardSuit(n) == 3){
-                        min = 25;
+                        repick = true;
                     }
                 }
                 // else if there is a valid match that wasn't played
-                if(min == 25){
-                    while(p.getCardSuit(num) != 3){
+                if(repick){
+                    while(p.getCardSuit(num-1) != 3){
                         //prompt for new choice
                         cout << "Please play \u2661: ";
                         cin >> num; 
                         //recheck if choice is valid match
                         if(num > 0 && num < p.getSize()){
-                            if (p.getCardSuit(num) == 3){
+                            if (p.getCardSuit(num-1) == 3){
                                 valid = true;
                                 p.setMatch(true); 
                                 p.setChoice(num-1);
+                                repick = false;
                             }
                         }  
                     }
                 }
-                else if (min != 25){
+                else if (!repick){
                     //no matching cards, so any card will do
                     valid = true;
                     //but we didn't match
