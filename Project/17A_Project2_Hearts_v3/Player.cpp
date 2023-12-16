@@ -163,7 +163,7 @@ void Player::play(Player &p, Stooge **s) {
                 p.getChoice();
             }
             if(!valid){
-                //loop through all the cards to get the min
+                //loop through all the cards to see if there is a potential match
                 for (int n = 0; n < p.getSize(); n++){
                     if(p.getCardSuit(n) == 0){
                         repick = true;
