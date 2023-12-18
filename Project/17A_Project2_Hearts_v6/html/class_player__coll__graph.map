@@ -1,0 +1,7 @@
+<map id="Player" name="Player">
+<area shape="rect" id="Node000001" title=" " alt="" coords="61,96,119,123"/>
+<area shape="rect" id="Node000002" href="$class_abs_player.html" title=" " alt="" coords="5,5,87,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,45,86,94,81,97,57,47"/>
+<area shape="rect" id="Node000003" href="$class_card.html" title=" " alt="" coords="111,5,160,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="124,47,99,97,94,94,120,45"/>
+</map>

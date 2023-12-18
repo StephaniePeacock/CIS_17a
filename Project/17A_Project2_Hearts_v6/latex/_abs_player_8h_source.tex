@@ -1,0 +1,35 @@
+\doxysection{Abs\+Player.\+h}
+\hypertarget{_abs_player_8h_source}{}\label{_abs_player_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ File:\ \ \ AbsPlayer.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Author:\ Stephanie\ Peacock}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created\ on\ December\ 10,\ 2023,\ 3:47\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Purpose:\ AbsPlayer\ Class\ Specification}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ ABSPLAYER\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ ABSPLAYER\_H}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}};\ \ \ \textcolor{comment}{//Forward\ Declarations}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_stooge}{Stooge}};\ \ \ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_abs_player}{AbsPlayer}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ play(\mbox{\hyperlink{class_player}{Player}}\ \&,\ \mbox{\hyperlink{class_stooge}{Stooge}}\ **)\ =\ 0;\ \ \textcolor{comment}{//pick\ a\ card\ -\/\ setChoice\ nested}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ mSort()\ =\ 0;\ \ \ \textcolor{comment}{//sort\ the\ cards}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ print()\ =\ 0;\ \ \ \textcolor{comment}{//print\ out\ the\ hand\ array}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ played()\ =\ 0;\ \ \textcolor{comment}{//print\ out\ name\ \&\ what\ was\ played}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ discard(\textcolor{keywordtype}{int})\ =\ 0;\ \textcolor{comment}{//was\ unset\ -\/\ now\ will\ remove\ the\ card\ from\ the\ hand}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \ \ getPlayers()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ABSPLAYER\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00030\ }
+
+\end{DoxyCode}

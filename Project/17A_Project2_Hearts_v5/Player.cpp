@@ -11,17 +11,23 @@
 #include "Stooge.h"
 using namespace std;
 
+// Definition of static member variable
+int Player::players = 0;
+
+
 Player::Player() : name(""),order(SECOND),size(0),choice(0),match(false),tScore(0),score(0){
     hand = new Card[size];
     for(int i = 0; i < size; i++){
         hand[i] = Card();
     }
+    players++;
 }
 Player::Player(string s) : name(s),size(0),choice(0),match(false),tScore(0),score(0){
     hand = new Card[size];
     for(int i = 0; i < size; i++){
         hand[i] = Card();
     }
+    players++;
 }
 Player::~Player() {
     hand = nullptr;
@@ -127,7 +133,7 @@ void Player::play(Player &p, Stooge **s) {
         //if player is first
         if(p.getOrder() == FIRST){
             // And they have 2 of clubs
-            if(p.getCardVal(0) == 0 && num != 1){
+            if(p.getCardVal(0) == 0){
                 //player chose 2 clubs
                 if(num == 1){
                     //num is valid - set all the things
@@ -139,7 +145,14 @@ void Player::play(Player &p, Stooge **s) {
                     while(num != 1){
                         //ask again until they play it
                         cout << "Please play 2\u2663: ";
-                        cin >> num;    
+                        cin >> num;
+                        if(num == 1){
+                            //new num is valid - set all the things
+                            p.setMatch(true);
+                            p.setChoice(num-1);
+                            valid = true;
+                            getChoice();
+                        }
                     }
                 }    
             }

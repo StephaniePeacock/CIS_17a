@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
     s[1]->setName("Curly");
     s[2]->setName("Moe");
     //Begin game intro
-    cout << "Hey buddy, we need a fourth player!" << endl
+    cout << "Hey buddy, we we have " << p.getPlayers() << " players!" << endl
          << "Let's play some Hearts!" << endl
          << "My name is Larry, this is my good friend Curly," << endl
          << "and that's his brother, Moe." << endl << endl
@@ -51,17 +51,12 @@ int main(int argc, char** argv) {
     p.setName(input);
     //finish intro
     cout << "Alright " << p.getName() << ", let's play Hearts! I'll deal." << endl << endl;
-    
-  //   deck.display();
-    
-
-    
     /************************
      *                      *
      *    BEGIN GAME LOOP   *
      *                      *
      ************************/
-  //  do{
+    do{
         //shuffle the cards
         deck.shuffle();
         //deal the cards
@@ -88,22 +83,18 @@ int main(int argc, char** argv) {
         //set as first if 2 clubs belongs to larry
         if(num%4 == 0){
             s[0]->setOrder(FIRST);
-//            cout << "Larry is first in main" << endl;
         }
         //set as first if 2 clubs belongs to curly
         if(num%4 == 1){
             s[1]->setOrder(FIRST);
-//            cout << "Curly is first in main" << endl;
         }
         //set as first if 2 clubs belongs to moe
         if(num%4 == 2){
             s[2]->setOrder(FIRST);
-//            cout << "Moe is first in main" << endl;
         }
         //set as first if 2 clubs belongs to player
         if(num%4 == 3){
             p.setOrder(FIRST);
-//            cout << "Player is first in main" << endl;
         }
         //set the order for everyone else & initial match status & tScores to 0
         order(p,s); 
@@ -136,33 +127,64 @@ int main(int argc, char** argv) {
                     p.played();
                 }
             }
-        //score the trick
-        trick(p,s);
-        //discard the cards that were played
-        p.discard(p.getChoice());
-        s[0]->discard(s[0]->getChoice());
-        s[1]->discard(s[1]->getChoice());
-        s[2]->discard(s[2]->getChoice());
-            
-      //  cout << "2 Clubs card value is "   << deck.card[0]->getCnum() << endl; 
+            //score the trick
+            trick(p,s);
+            //discard the cards that were played
+            p.discard(p.getChoice());
+            s[0]->discard(s[0]->getChoice());
+            s[1]->discard(s[1]->getChoice());
+            s[2]->discard(s[2]->getChoice());
         }
-        //check for shooting the moon
-        //add tScores to score
-        //output current game scores
-        
-        //print out player's cards
-   // }while(p.getScore() < 50 && 
-    //        s[0]->getScore() < 50 && 
-    //        s[1]->getScore() < 50 &&
-    //        s[2]->getScore() < 50);
-
-        
-        //someone hit 50 points, let's find the winner
-    
- 
-    
-    
-    
+        // Check for Shooting the Moon
+        p.getTrick()     == 26 ? p.setTrick(0),     s[0]->setTrick(26), s[1]->setTrick(26), s[2]->setTrick(26), cout << "Hey, Wiseguy! You shot the moon! The Stooges takes all points." << endl << endl :
+        s[0]->getTrick() == 26 ? s[0]->setTrick(0), s[1]->setTrick(26), s[2]->setTrick(26), p.setTrick(26),     cout << "Larry shot the moon! The rest of you schmucks can take the points."  << endl << endl :
+        s[1]->getTrick() == 26 ? s[1]->setTrick(0), s[2]->setTrick(26), p.setTrick(26),     s[0]->setTrick(26), cout << "Curly shot the moon! The rest of you schmucks can take the points."  << endl << endl :
+        s[2]->getTrick() == 26 ? s[2]->setTrick(0), p.setTrick(26),     s[0]->setTrick(26), s[1]->setTrick(26), cout << "Moe shot the moon! The rest of you schmucks can take the points."  << endl << endl :    
+        cout  << "What a fun hand!" << endl << endl;
+        //add tscores to score
+        p.setScore(p.getTrick());
+        for(int n = 0; n < 3; n++){
+            s[n]->setScore(s[n]->getTrick());
+        }
+        //output current game scores && reset trick scores & orders
+        for(int i = 0; i < 4; i++){
+            if(i == 3){
+                cout << p.getName() <<"'s score is " << p.getScore();
+                p.resetTrick();
+                p.setOrder(SECOND);
+            }else{
+                //output the stooge
+                cout << s[i]->getName() <<"'s score is " << s[i]->getScore() << "\t"; 
+                s[i]->resetTrick();
+                s[i]->setOrder(SECOND);
+            }   
+        }
+        cout << endl;
+    }while(p.getScore() < 50 && 
+        s[0]->getScore() < 50 && 
+        s[1]->getScore() < 50 &&
+        s[2]->getScore() < 50);
+    //someone hit 50 points, let's find the winner
+    //Find the winner
+    int winner;
+    int min = 150;
+    for(int i = 0; i < 4; i++){
+        if(i == 3){
+            if(p.getScore() < min){
+                min = p.getScore();
+                winner = 3;
+            }
+        }else{
+            if(s[i]->getScore() < min){
+                min = s[i]->getScore();
+                winner = i;
+            }
+        }
+            
+    }
+    cout << endl;
+    if (winner == 3) { cout << "You won the game!" << endl; }
+    else { cout << s[winner]->getName() << " won the game. Better luck next time!" << endl; }
     //Clean Up & Exit Program
     for(int i = 0; i < 3; i++){
         delete s[i];

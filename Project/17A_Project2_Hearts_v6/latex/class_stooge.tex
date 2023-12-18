@@ -1,0 +1,123 @@
+\doxysection{Stooge Class Reference}
+\hypertarget{class_stooge}{}\label{class_stooge}\index{Stooge@{Stooge}}
+
+
+Inheritance diagram for Stooge\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=141pt]{class_stooge__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Stooge\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{class_stooge__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_stooge_ae2648b04539044a357fd9d6e2d78c555}\label{class_stooge_ae2648b04539044a357fd9d6e2d78c555} 
+{\bfseries Stooge} (string s)
+\item 
+virtual void \mbox{\hyperlink{class_stooge_ade9d0fb0365327cf23e301c56228d7b6}{play}} (\mbox{\hyperlink{class_player}{Player}} \&p, \mbox{\hyperlink{class_stooge}{Stooge}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}s)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_player}{Player}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Player} (string)
+\item 
+void {\bfseries add\+Card} (\mbox{\hyperlink{class_card}{Card}} c)
+\item 
+void \mbox{\hyperlink{class_player_aa25d57681aab72d739a076bb20be1d95}{discard}} (int)
+\item 
+void {\bfseries set\+Name} (string s)
+\item 
+void {\bfseries set\+Order} (Order ord)
+\item 
+void {\bfseries set\+Choice} (int c)
+\item 
+void {\bfseries set\+Match} (bool m)
+\item 
+void {\bfseries set\+Trick} (int t)
+\item 
+void {\bfseries reset\+Trick} ()
+\item 
+void {\bfseries set\+Score} (int sc)
+\item 
+string {\bfseries get\+Name} () const
+\item 
+Order {\bfseries get\+Order} () const
+\item 
+int {\bfseries get\+Choice} () const
+\item 
+bool {\bfseries get\+Match} () const
+\item 
+int {\bfseries get\+Trick} () const
+\item 
+int {\bfseries get\+Score} () const
+\item 
+int {\bfseries get\+Size} () const
+\item 
+int {\bfseries get\+Card\+Suit} (int i) const
+\item 
+int {\bfseries get\+Card\+Val} (int i) const
+\item 
+int \mbox{\hyperlink{class_player_a2f8a50df2b1469750d1eac3025e9daff}{get\+Players}} () const
+\item 
+void \mbox{\hyperlink{class_player_a847a047ffb0a61af1be5471cce196498}{m\+Sort}} ()
+\item 
+void \mbox{\hyperlink{class_player_ae298148cd8152bbe1d2e237e76621ce2}{print}} ()
+\item 
+void \mbox{\hyperlink{class_player_a1776de683c8747be0d70d241b1eb9a62}{played}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_player}{Player}}}
+\begin{DoxyCompactItemize}
+\item 
+static int {\bfseries players} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_player}{Player}}}
+\begin{DoxyCompactItemize}
+\item 
+string {\bfseries name}
+\item 
+Order {\bfseries order}
+\item 
+\mbox{\hyperlink{class_card}{Card}} \texorpdfstring{$\ast$}{*} {\bfseries hand}
+\item 
+int {\bfseries size}
+\item 
+int {\bfseries choice}
+\item 
+bool {\bfseries match}
+\item 
+int {\bfseries t\+Score}
+\item 
+int {\bfseries score}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_stooge_ade9d0fb0365327cf23e301c56228d7b6}\label{class_stooge_ade9d0fb0365327cf23e301c56228d7b6} 
+\index{Stooge@{Stooge}!play@{play}}
+\index{play@{play}!Stooge@{Stooge}}
+\doxysubsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily void Stooge\+::play (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{p,  }\item[{\mbox{\hyperlink{class_stooge}{Stooge}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_player}{Player}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Stooge.\+h\item 
+Stooge.\+cpp\end{DoxyCompactItemize}

@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=17a_project2_hearts_v4
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/17a_project2_hearts_v4
+CND_ARTIFACT_NAME_Release=17a_project2_hearts_v5
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/17a_project2_hearts_v5
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=17aproject2heartsv4.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/17aproject2heartsv4.tar
+CND_PACKAGE_NAME_Release=17aproject2heartsv5.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/17aproject2heartsv5.tar
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=17a_project2_hearts_v4
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/17a_project2_hearts_v4
+CND_ARTIFACT_NAME_Debug=17a_project2_hearts_v5
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/17a_project2_hearts_v5
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=17aproject2heartsv4.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/17aproject2heartsv4.tar
+CND_PACKAGE_NAME_Debug=17aproject2heartsv5.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/17aproject2heartsv5.tar
 #
 # include compiler specific variables
 #

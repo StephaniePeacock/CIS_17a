@@ -1,0 +1,38 @@
+\doxysection{Deck.\+h}
+\hypertarget{_deck_8h_source}{}\label{_deck_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ File:\ \ \ Card.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Author:\ Stephanie\ Peacock}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created\ on\ November\ 26,\ 2023,\ 9:46\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Purpose:\ Deck\ Class\ Specification}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ DECK\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ DECK\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Card.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}};\ \ \ \textcolor{comment}{//So\ it\ knows\ they\ exist\ for\ Deal\ function}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_stooge}{Stooge}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_deck}{Deck}}\{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nCards;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_card}{Card}}\ **card;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_deck}{Deck}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//constructor\ -\/\ \#cards\ to\ make}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_deck}{\string~Deck}}();\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//destructor}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getNCards()\ \{\ \textcolor{keywordflow}{return}\ nCards;\ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ display();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ shuffle();\ \ \ \ \ \textcolor{comment}{//shuffle\ the\ deck}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_card}{Card}}\ deal(\textcolor{keywordtype}{int});\ \ \ \ \ \textcolor{comment}{//\ Deal\ a\ card\ to\ a\ player}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ linSrch();\ \ \ \ \ \ \textcolor{comment}{//find\ where\ the\ 2\ clubs\ is,\ so\ we\ can\ set\ order}}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DECK\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ \ \ \ void\ deal(Player\ \&\ p,\ int\ i,\ const\ Card\&\ n)\{\ p.addCard(n);\ \}}}
+
+\end{DoxyCode}

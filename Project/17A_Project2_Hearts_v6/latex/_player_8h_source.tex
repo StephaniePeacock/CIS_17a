@@ -1,0 +1,72 @@
+\doxysection{Player.\+h}
+\hypertarget{_player_8h_source}{}\label{_player_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ File:\ \ \ Player.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Author:\ Stephanie\ Peacock}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created\ on\ December\ 10,\ 2023,\ 7:15\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Purpose:\ Player\ Class\ Specification}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}AbsPlayer.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Deck.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ PLAYER\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ PLAYER\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{enum}\ Order\ \{FIRST,SECOND,THIRD,FOURTH\};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_stooge}{Stooge}};\ \ \ \textcolor{comment}{//Forward\ Declare\ Stooge}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_abs_player}{AbsPlayer}}\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{string}\ name;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//C-\/String\ to\ hold\ player\ name}}
+\DoxyCodeLine{00023\ \ \ \ \ Order\ \ order;\ \ \ \ \ \ \ \ \textcolor{comment}{//To\ determine\ order\ for\ the\ trick\ \ \ \ }}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_card}{Card}}\ \ *hand;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Holds\ the\ player's\ cards}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ size;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//current\ number\ of\ cards\ in\ the\ player's\ hand}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ choice;\ \ \ \ \ \ \ \textcolor{comment}{//Int\ value\ for\ the\ player's\ card}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ match;\ \ \ \ \ \ \ \ \textcolor{comment}{//Enforce\ suit}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ tScore;\ \ \ \ \ \ \ \textcolor{comment}{//Trick\ score}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ score;\ \ \ \ \ \ \ \ \textcolor{comment}{//Game\ score}}
+\DoxyCodeLine{00030\ \ \ \ \ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}();}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_player}{\string~Player}}();}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//Mutators}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ addCard(\mbox{\hyperlink{class_card}{Card}}\ c);\ \ \textcolor{comment}{//push\ back\ a\ card\ to\ the\ hand\ (modifies\ hand\ \&\ size)}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ discard(\textcolor{keywordtype}{int});\ \ \ \textcolor{comment}{//pop\ off\ selected\ card\ from\ the\ hand\ (modifies\ hand\ \&\ size)}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ setName(\textcolor{keywordtype}{string}\ s)\ \ \{\ name\ =\ s;\ \ \ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ setOrder(Order\ ord)\{\ order\ =\ ord;\}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ setChoice(\textcolor{keywordtype}{int}\ c)\ \ \ \{\ choice\ =\ c;\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ setMatch(\textcolor{keywordtype}{bool}\ m)\ \ \ \{\ match\ =\ m;\ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ setTrick(\textcolor{keywordtype}{int}\ t)\ \ \ \ \{\ tScore\ +=\ t;\}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ resetTrick()\ \ \ \ \ \ \ \{\ tScore\ =\ 0;\ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ setScore(\textcolor{keywordtype}{int}\ sc)\ \ \ \{\ score\ +=\ sc;\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ players;\ \ \textcolor{comment}{//tracks\ total\ number\ of\ players}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{comment}{//Accessors}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{string}\ getName()\textcolor{keyword}{\ \ const\ \ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ name;\ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ Order\ \ getOrder()\textcolor{keyword}{\ const\ \ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ order;\ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ getChoice()\textcolor{keyword}{const\ \ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ choice;\ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ getMatch()\textcolor{keyword}{\ const\ \ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ match;\ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ getTrick()\textcolor{keyword}{\ const\ \ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ tScore;\ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ getScore()\textcolor{keyword}{\ const\ \ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ score;\ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ getSize()\textcolor{keyword}{\ \ const\ \ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ size;\ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ getCardSuit(\textcolor{keywordtype}{int}\ i)\textcolor{keyword}{const\ \ \ }\{\ \textcolor{keywordflow}{return}\ hand[i].getSuit();\}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ getCardVal(\textcolor{keywordtype}{int}\ i)\textcolor{keyword}{\ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ hand[i].getCnum();\}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ getPlayers()\textcolor{keyword}{\ const\ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ players;\}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//Other\ Functions}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ play(\mbox{\hyperlink{class_player}{Player}}\ \&,\ \mbox{\hyperlink{class_stooge}{Stooge}}\ **);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ mSort();}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ print();}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ played()\{\ cout\ <<\ getName()\ <<\ \textcolor{stringliteral}{"{}\ played\ "{}}\ <<\ hand[getChoice()].getFace()\ <<\ endl;\}}
+\DoxyCodeLine{00062\ \ \ \ \ }
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PLAYER\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00067\ }
+
+\end{DoxyCode}
