@@ -114,19 +114,28 @@ int main(int argc, char** argv) {
         for(int i = 0; i < 13; i++){
             //each player plays
             for(int n = 0; n < 4; n++){
-                //player checks 3 - dont go out of bounds
+                //Larry's turn
                 if(s[0]->getOrder() == n){
+                    //larry plays
                     s[0]->play(p,s);
+                    //output what he played
                     s[0]->played();
                 }
+                //Curly's Turn
                 if(s[1]->getOrder() == n){
+                    //curly plays
                     s[1]->play(p,s);
+                    //output what he played
                     s[1]->played();
                 }
+                //Moe's turn
                 if(s[2]->getOrder() == n){
+                    //Moe plays
                     s[2]->play(p,s);
+                    //output what he played
                     s[2]->played();
                 }
+                //Player's turn
                 if(p.getOrder() == n){   
                     //pick a card
                     p.play(p,s);
@@ -153,15 +162,17 @@ int main(int argc, char** argv) {
         for(int n = 0; n < 3; n++){
             s[n]->setScore(s[n]->getTrick());
         }
-        //output current game scores && reset trick scores & orders
+        //output current game scores
         for(int i = 0; i < 4; i++){
             if(i == 3){
                 cout << p.getName() <<"'s score is " << p.getScore();
+                //reset the player's trick score to 0 and order to second
                 p.resetTrick();
                 p.setOrder(SECOND);
             }else{
                 //output the stooge
                 cout << s[i]->getName() <<"'s score is " << s[i]->getScore() << "\t"; 
+                //reset current stooge's trick to 0 and order to second
                 s[i]->resetTrick();
                 s[i]->setOrder(SECOND);
             }   
@@ -176,13 +187,18 @@ int main(int argc, char** argv) {
     int winner;
     int min = 150;
     for(int i = 0; i < 4; i++){
+        //player checks 3 so we dont go out of bounds
         if(i == 3){
+            //player had best score
             if(p.getScore() < min){
+                //set min to them & winner to their value
                 min = p.getScore();
                 winner = 3;
             }
         }else{
+            //current stooge is lowest score
             if(s[i]->getScore() < min){
+                //set the current stooge score to min & make them winner
                 min = s[i]->getScore();
                 winner = i;
             }
@@ -190,8 +206,14 @@ int main(int argc, char** argv) {
             
     }
     cout << endl;
-    if (winner == 3) { cout << "You won the game!" << endl; }
-    else { cout << s[winner]->getName() << " won the game. Better luck next time!" << endl; }
+    //check if player won first
+    if (winner == 3) { 
+        cout << "You won the game!" << endl; 
+    }
+    //if player didn't win, output winning stooge
+    else { 
+        cout << s[winner]->getName() << " won the game. Better luck next time!" << endl; 
+    }
     //Clean Up & Exit Program
     for(int i = 0; i < 3; i++){
         delete s[i];
@@ -204,36 +226,64 @@ void order(Player &p, Stooge **s){
     //set the order - player is first
         if(p.getOrder() == FIRST){
             //player match is true, tScore is 0
-            p.setMatch(true); p.setTrick(0);
+            p.setMatch(true); 
+            p.setTrick(0);
             //rest are false, all tScores 0
-            s[0]->setOrder(SECOND);  s[0]->setMatch(false);  s[0]->setTrick(0);
-            s[1]->setOrder(THIRD);   s[1]->setMatch(false);  s[1]->setTrick(0);
-            s[2]->setOrder(FOURTH);  s[2]->setMatch(false);  s[2]->setTrick(0);
+            s[0]->setOrder(SECOND);  
+            s[0]->setMatch(false);  
+            s[0]->setTrick(0);
+            s[1]->setOrder(THIRD);   
+            s[1]->setMatch(false);  
+            s[1]->setTrick(0);
+            s[2]->setOrder(FOURTH);  
+            s[2]->setMatch(false);  
+            s[2]->setTrick(0);
         }
         //set the order - larry is first
         else if(s[0]->getOrder() == FIRST){
             //larry match is true tScore is 0
-            s[0]->setMatch(true);   s[0]->setTrick(0);
+            s[0]->setMatch(true);   
+            s[0]->setTrick(0);
             //rest don't match tScores are 0
-            s[1]->setOrder(SECOND); s[1]->setMatch(false);  s[1]->setTrick(0);
-            s[2]->setOrder(THIRD);  s[2]->setMatch(false);  s[2]->setTrick(0);
-            p.setOrder(FOURTH);     p.setMatch(false);      p.setTrick(0);
+            s[1]->setOrder(SECOND); 
+            s[1]->setMatch(false);  
+            s[1]->setTrick(0);
+            s[2]->setOrder(THIRD);  
+            s[2]->setMatch(false);  
+            s[2]->setTrick(0);
+            p.setOrder(FOURTH);     
+            p.setMatch(false);      
+            p.setTrick(0);
         }
         //set the order - curly is first
         else if(s[1]->getOrder() == FIRST){
             //curly's match is true tScore is 0
-            s[1]->setMatch(true);   s[1]->setTrick(0);
+            s[1]->setMatch(true);   
+            s[1]->setTrick(0);
             //rest dont match tScores are 0
-            s[2]->setOrder(SECOND); s[2]->setMatch(false);  s[2]->setTrick(0);
-            p.setOrder(THIRD);      p.setMatch(false);      p.setTrick(0);
-            s[0]->setOrder(FOURTH); s[0]->setMatch(false);  s[0]->setTrick(0); 
+            s[2]->setOrder(SECOND); 
+            s[2]->setMatch(false);  
+            s[2]->setTrick(0);
+            p.setOrder(THIRD);      
+            p.setMatch(false);      
+            p.setTrick(0);
+            s[0]->setOrder(FOURTH); 
+            s[0]->setMatch(false);  
+            s[0]->setTrick(0); 
         }
         //set the order - moe is first
         else if(s[2]->getOrder() == FIRST){
-            s[2]->setMatch(true);   s[2]->setTrick(0);
-            p.setOrder(SECOND);     p.setMatch(false);      p.setTrick(0);
-            s[0]->setOrder(THIRD);  s[0]->setMatch(false);  s[0]->setTrick(0);
-            s[1]->setOrder(FOURTH); s[1]->setMatch(false);  s[1]->setTrick(0);
+            s[2]->setMatch(true);   
+            s[2]->setTrick(0);
+            p.setOrder(SECOND);     
+            p.setMatch(false);      
+            p.setTrick(0);
+            s[0]->setOrder(THIRD);  
+            s[0]->setMatch(false);  
+            s[0]->setTrick(0);
+            s[1]->setOrder(FOURTH); 
+            s[1]->setMatch(false);  
+            s[1]->setTrick(0);
         }
 }
 //score the trick

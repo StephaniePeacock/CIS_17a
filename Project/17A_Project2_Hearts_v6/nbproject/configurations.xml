@@ -9,7 +9,6 @@
       <itemPath>Deck.h</itemPath>
       <itemPath>Player.h</itemPath>
       <itemPath>Stooge.h</itemPath>
-      <itemPath>hearts.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -76,8 +75,6 @@
       </item>
       <item path="Stooge.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="hearts.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -106,8 +103,6 @@
       <item path="Stooge.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Stooge.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="hearts.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

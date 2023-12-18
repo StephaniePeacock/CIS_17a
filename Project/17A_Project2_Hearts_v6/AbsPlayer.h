@@ -16,8 +16,6 @@ class Stooge;
 
 class AbsPlayer {
     protected:
-        
-    public:
         virtual void play(Player &, Stooge **) = 0;  //pick a card - setChoice nested
         virtual void mSort() = 0;   //sort the cards
         virtual void print() = 0;   //print out the hand array

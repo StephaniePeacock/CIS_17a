@@ -74,16 +74,16 @@ void Player::discard(int c) {
     }
 }
 void Player::mSort(){
-for(int j = 0; j < 13; j++){
-    for(int i = j + 1; i < 13; i++){
-        if(hand[j] > hand[i]){
-            //sort the player int values
-            Card temp = hand[j];
-            hand[j] = hand[i];
-            hand[i] = temp;
+    for(int j = 0; j < 13; j++){
+        for(int i = j + 1; i < 13; i++){
+            if(hand[j] > hand[i]){
+                //sort the player int values
+                Card temp = hand[j];
+                hand[j] = hand[i];
+                hand[i] = temp;
+            }
         }
     }
-}
 }
 void Player::print(){
 cout << endl << "Play Card #:\t";

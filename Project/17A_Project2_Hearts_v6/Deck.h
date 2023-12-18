@@ -29,5 +29,3 @@ class Deck{
 };
 
 #endif /* DECK_H */
-
-//    void deal(Player & p, int i, const Card& n){ p.addCard(n); }
